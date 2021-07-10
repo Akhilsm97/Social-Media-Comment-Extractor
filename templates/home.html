@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+    <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+
+
+
+
+    </style>
+    <meta charset="utf-8">
+    <title>SocialPoc </title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<section id="navbar">
+    <div class="container-fluid">
+        <div class="row nav">
+            <div class="col-sm-2 logo">
+                SocialPoc
+            </div>
+            <div class="col-sm-6">
+            </div>
+
+            <div class="col-sm-1 top_link">
+                <a href="#">About</a>
+            </div>
+            <div class="col-sm-1 top_link">
+                <a href="#">Help</a>
+            </div>
+            <div class="col-sm-2">
+                <div class="dropdown">
+                    <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                        <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
+                    </div>
+                    <div class="dropdown-menu ">
+                        <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt"
+                                                                                  aria-hidden="true"></span></i>
+                            Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+    <div class="row navhead">
+        <div class="col-sm-1">
+
+        </div>
+        <div class="col-sm-2 text-center">
+            <a href="/app/home">All</a>
+            <div class="line">
+
+            </div>
+        </div>
+        <div class="col-sm-2 text-center">
+            <a href="/app/mypost">My Posts</a>
+        </div>
+        <div class="col-sm-2 text-center">
+            <a href="/app/addpost">Add Post</a>
+        </div>
+        <form class="col-sm-5" method="POST" action="/search">{% csrf_token %}
+            <!--          <label for="search">Search</label>-->
+            <input type="text" id="search" name="search" value="">
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Search
+            </button>
+        </form>
+    </div>
+
+    <section id="all_posts">
+
+
+
+
+        {% block search %}
+        {% endblock %}
+
+        {% for p in posts %}
+        <div class="row post_area">
+
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-6 post">
+                <div style="margin:10px auto;">
+                    <i class="fas fa-user-circle" style="font-size: 35px;"></i><span id="user">{{p.username}}</span>
+                    <span style="margin-left:280px; font-size:14px;">{{p.time}}</span>
+                </div>
+                <div>
+                    <p>{{p.post_text}}
+                    </p>
+                    <img src="../../media/{{p.post_img}}" alt="" class="responsive">
+                </div>
+                <div class="like_btn">
+                    <span style="margin-right:0px;" id="impr{{p.post_id}}">24</span>
+                    <span><i class="far fa-thumbs-up" id="icon{{p.post_id}}" style="color:black;"></i> <button
+                            class='btn l_btn' id="{{p.post_id}}"> Like</button></span>
+                    <span><i class="far fa-comment"></i> <a href="#"> Comment</a></span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+
+{% csrf_token %}
+<script type="text/javascript">
+    $(document).ready(function(){
+         $(".l_btn").click(function(){
+           console.log("Button clicked");
+           p_id = $(this).attr('id')
+           console.log(p_id);
+           // console.log($(".shu").attr('id'));
+           p_l_username = $("#login_user_name").text();
+           console.log(p_l_username);
+
+           if($('#icon'+p_id).css('color')=='rgb(0, 0, 0)')
+           {
+           $.ajax(
+             {
+               type:"GET",
+               url: "/likepost",
+               data:{
+                  post_id: p_id ,
+                  post_like_name : p_l_username
+                },
+                success: function( data )
+                {
+                  console.log(data);
+                  console.log("Successfully liked");
+                  console.log($('#icon'+data).css('color'));
+                  // $('#icon'+data).css({'color':'blue'});
+                  // console.log($('#icon'+data).css('color'));
+                  // $('#impr')
+                  if($('#icon'+data).css('color')=='rgb(0, 0, 0)'){
+                    var el = parseInt($('#impr'+data).text());
+                    $('#impr'+data).text(el+1);
+                    $('#icon'+data).css({'color':'blue'});
+                    console.log($('#icon'+data).css('color'));
+                  }
+
+
+                }
+              });
+            }
+
+           // $.ajax({
+           //   type: "POST",
+           //   url: "/like",
+             // headers: {
+             //   'Csrf-Token': '@play.filters.csrf.CSRF.getToken.map(_.value)'
+             // },
+             // data : {
+             //   'post_id': p_id,
+             //    'like_username':  p_l_username,
+             //    'csrfmiddlewaretoken': '{{ csrf_token }}',
+             // }
+             // data: "{post_id : " + p_id + "," + "like_username : " + p_l_username +"}",
+             //
+             //
+             // success: function(result){
+             //   console.log(result);
+             //   // alert(result.d);
+             //   console.log("successfully like the post");
+           //   }
+           // });
+         });
+       });
+
+       //CSRF code
+//        function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = cookies[i].trim();
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+// var csrftoken = getCookie('csrftoken');
+//
+// function csrfSafeMethod(method) {
+//     // these HTTP methods do not require CSRF protection
+//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+// }
+// $.ajaxSetup({
+//     beforeSend: function(xhr, settings) {
+//         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+//             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+//         }
+//     }
+// });
+       // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+
+
+
+
+</script>
+</body>
+</html>

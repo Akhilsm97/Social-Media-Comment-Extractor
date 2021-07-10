@@ -1,0 +1,11 @@
+.main{
+  position: fixed;
+  top: 40%;
+  left: 38%;
+  margin-top: -50px;
+  margin-left: -100px;
+  /* border: 2px solid black; */
+  color:green;
+  letter-spacing: 2px;
+  font-family: "calibri";
+}

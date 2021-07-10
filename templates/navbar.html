@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+
+   <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+</style>
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section id="navbar">
+    <div class="container-fluid">
+        <div class="row nav">
+            <div class="col-sm-2 logo">
+                SocialPoc
+            </div>
+            <div class="col-sm-6">
+            </div>
+
+            <div class="col-sm-1 top_link">
+                <a href="#">About</a>
+            </div>
+            <div class="col-sm-1 top_link">
+                <a href="#">Help</a>
+            </div>
+            <div class="col-sm-2">
+                <div class="dropdown">
+                    <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                        <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
+                    </div>
+                    <div class="dropdown-menu ">
+                        <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt"
+                                                                                  aria-hidden="true"></span></i>
+                            Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% block home %}{% endblock %}
+
+</body>
+</html>

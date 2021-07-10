@@ -1,0 +1,86 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css";
+
+.logo{
+  font-family: 'Zhi Mang Xing', cursive;
+  font-size: 35px;
+  width:50%;
+  padding-left: 20px;
+}
+
+.dropdown{
+  padding: 10px 15px;
+}
+
+span{
+  padding-right: 10px;
+}
+
+.top_link{
+  padding-top: 15px;
+}
+
+.nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+
+.line{
+  width: 120px;
+  height:3px;
+  margin-left: 15px;
+  margin-top: 3px;
+  background-color: grey;
+}
+
+textarea{
+  padding: 10px;
+}
+.prev{
+  background-color:rgba(169,169,169,0.5);
+  position: absolute;
+  top:0;
+  display: none;
+  /* display: visible; */
+}
+
+#imgd{
+  /* display: none; */
+}
+.post_area{
+  border:1px solid black;
+  margin: 80px 10px;
+  background-color: white;
+}
+#user{
+font-size: 25px;
+margin-left:15px;
+font-family: 'Arvo', serif;
+}
+
+.post_area img{
+  width: 540px;
+}
+
+.like_btn{
+    margin: 10px 10px;
+}
+.like_btn span{
+  padding: 10px;
+  margin-right: 20px;
+}
+
+#cross{
+  margin-left: 345px;
+  position: absolute;
+  top:1;
+  /* right:1; */
+  cursor: pointer;
+  /* padding-top: -10px; */
+}

@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+        <div class="col-sm-5" method="POST" action="{% url 'search' %}">{% csrf_token %}
+            <!--          <label for="search">Search</label>-->
+            <input type="text" id="search" name="search" value="">
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Search
+            </button>
+        </div>
+
+{% block search%}
+
+{% if search %}
+    <div><h1>you are search for {{search}}</h1></div>
+{% for s in posts %}
+
+<div>
+
+{{s}}</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+    {% for result in all_search_results %}
+   <div>{{ result.username }}</div>
+{% empty %}
+<div>add something to show no results</div>
+{% endfor %}
+

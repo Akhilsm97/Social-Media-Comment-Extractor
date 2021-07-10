@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+
+        <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+
+
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/addpost.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <section  id="navbar">
+      <div class="container-fluid">
+        <div style="background-color: lightblue;" class="row nav">
+          <div class="col-sm-2 logo">
+           SocialPoc
+          </div>
+          <div style="background-color: lightblue;" class="col-sm-6">
+          </div>
+
+          <div class="col-sm-1 top_link">
+            <a href="#">About</a>
+          </div>
+          <div class="col-sm-1 top_link">
+            <a href="#">Help</a>
+          </div>
+          <div class="col-sm-2">
+            <div class="dropdown">
+              <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <span><i class="fas fa-user-alt"></i></span> {{username}}
+              </div>
+              <div class="dropdown-menu ">
+                <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="row navhead">
+        <div class="col-sm-1">
+
+        </div>
+        <div class="col-sm-2 text-center">
+          <a href="/home">All</a>
+        </div>
+        <div class="col-sm-2 text-center">
+          <a href="/mypost">My Posts</a>
+        </div>
+        <div class="col-sm-2 text-center">
+          <a href="/addpost">Add Post</a>
+          <div class="line">
+
+          </div>
+        </div>
+        <form class="col-sm-5" method="POST" action="{% url 'search' %}">{% csrf_token %}
+            <!--          <label for="search">Search</label>-->
+            <input type="text" id="search" name="search" value="">
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Search
+            </button>
+        </form>
+      </div>
+
+      <section id="addpost">
+        <h3>Create Post </h3>
+        <form class="" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          <!-- <input type="text" name="" value="" placeholder="Enter Some text here ..."> -->
+          <textarea id="post_text" name="post_text" rows="5" cols="60" placeholder="Enter some text here ..."></textarea>
+          <br><br>
+          <input id="post_img" type="file" name="document" value="" accept="image/*">
+          <!-- &nbsp;&nbsp; -->
+          <!-- <button type="submit" name="button" formaction="/upload"><i class="fas fa-upload"></i></button> -->
+          <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+          <button type="button" name="" id="prev_btn">Preview</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit" name="button" formaction="/add">Submit</button>
+          <!-- onclick="document.getElementByClass('prev').style.display = 'visible';" -->
+        </form>
+      </section>
+    </div>
+
+    <section>
+      <div class="container-fluid prev">
+        <div class="row">
+          <div class="col-sm-3">
+          </div>
+          <div class="col-sm-5 post_area">
+            <div style="margin:10px auto;">
+              <i class="fas fa-user-circle" style="font-size: 35px;"></i>
+              <span id="user">{{username}}</span>
+              <span id="cross"><i class="fas fa-times"></i></span>
+            </div>
+            <div>
+              <p id="p1">
+               </p>
+              <img id="imgd" src="" alt="not found" class="responsive">
+            </div>
+            <div class="like_btn">
+              <span><i class="far fa-thumbs-up"></i> <a href="#"> Like</a></span>
+              <span><i class="far fa-comment"></i> <a href="#"> Comment</a></span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+
+    const inpFile =  document.getElementById('post_img');
+    const previewImage = document.getElementById('imgd');
+
+
+    inpFile.addEventListener("change",function(){
+      const file = this.files[0];
+      console.log(file);
+
+
+        const reader = new FileReader();
+
+        reader.addEventListener("load",function(){
+          console.log("shubham");
+          console.log(this);
+
+          console.log(previewImage);
+          previewImage.setAttribute("src",this.result);
+          // previewImage.src = this.result;
+        });
+        reader.readAsDataURL(file);
+    });
+    // console.log("this is input file ",inpFile);
+    //this is for click on preview
+    document.getElementById("prev_btn").addEventListener('click',
+    function(){
+      var post_text = document.getElementById('post_text').value;
+      document.getElementById('p1').innerHTML = post_text;
+      // var post_img = document.getElementById('post_img').value;
+      console.log(post_text);
+
+      // var fullPath = document.getElementById("img1").src;
+      // var filename = post_img.replace(/^.*[\\\/]/, '');
+      // console.log(filename);
+      // document.getElementById('imgd').src = "../../media/"+filename;
+     document.querySelector('.prev').style.display = 'grid';
+    });
+
+//when user click on cancle button
+    document.querySelector('#cross').addEventListener('click',
+  function(){
+    document.querySelector('.prev').style.display = 'none';
+  });
+
+    </script>
+
+  </body>
+
+</html>

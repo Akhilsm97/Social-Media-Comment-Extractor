@@ -1,2 +1,0 @@
-# socialmedia_poc
-
