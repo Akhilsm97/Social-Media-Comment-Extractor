@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from datetime import date
+from datetime import date, datetime
 from app1 import models
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
@@ -13,7 +13,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie,csrf_protect,csrf_ex
 
 
 # Create your views here.
-from app1.models import Posts, Likes
+from app1.models import Posts, Likes, Comments
 
 
 def search(request):
@@ -40,6 +40,7 @@ def search(request):
 #         return context
 
 def addpost(request):
+    print("iiiiii")
     username = request.session['username']
     res = render(request,'addpost.html',{'username':username})
     return res
@@ -192,4 +193,23 @@ def sign_up_page(request):
     else:
         res = render(request,'sign_up.html')
     return res
+
+def newcomment(request,post_id):
+    obj=post_id;
+    ob=Comments.objects.filter(post_id=post_id)
+    return render(request,'comment.html',{'post_id':obj,'ob':ob})
+
+def comment1(request,post_id):
+    if request.method=='POST':
+        ct = Comments()
+        print(post_id)
+        ct.post_id = post_id
+        ct.username=request.session.get("username")
+        ct.comment = request.POST.get("comment")
+        now = datetime.now()
+        date_time = now.strftime("%d/%m/%Y,%H:%M:%S")
+        ct.DATE = date_time
+        ct.save()
+        return redirect('/home')
+
 

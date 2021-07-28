@@ -11,3 +11,11 @@ class Posts(models.Model):
 class Likes(models.Model):
     post_id = models.CharField(max_length=5)
     like_username = models.CharField(max_length=20)
+
+class Comments(models.Model):
+    post_id=models.CharField(max_length=20)
+    username=models.CharField(max_length=20)
+    comment=models.CharField(max_length=100)
+    DATE=models.CharField(max_length=50)
+
+

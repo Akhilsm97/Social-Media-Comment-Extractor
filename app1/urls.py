@@ -14,4 +14,6 @@ urlpatterns = [
     url('upload',views.upload),
     url('likepost',views.like_post),
     url('search',views.search,name='search'),
+    url('insertcomment/(?P<post_id>\w+)/$',views.newcomment),
+    url('comment_new/(?P<post_id>\w+)/$',views.comment1),
 ]
