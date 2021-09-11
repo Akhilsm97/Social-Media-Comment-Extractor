@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+
+        <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+
+
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/addpost.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <section  id="navbar">
+      <div class="container-fluid">
+        <div style="background-color: lightblue;" class="row nav">
+          <div class="col-sm-2 logo">
+           SocialPoc
+          </div>
+          <div style="background-color: lightblue;" class="col-sm-6">
+          </div>
+
+          <div class="col-sm-1 top_link">
+            <a href="#">About</a>
+          </div>
+          <div class="col-sm-1 top_link">
+            <a href="#">Help</a>
+          </div>
+          <div class="col-sm-2">
+            <div class="dropdown">
+              <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <span><i class="fas fa-user-alt"></i></span> {{username}}
+              </div>
+              <div class="dropdown-menu ">
+                <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<div style="margin:30px auto;">
+  <div class="row">
+	<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+    <table border="3">
+      <thead>
+      <th>Post_Image</th>
+      </thead>
+
+      {% for p in post %}
+      <tr>
+        <td><div>{{p.post_img}}</div><img src="../../../../media/{{ p.post_img}}" height="300" width="300"></td>
+      </tr>
+
+      {% endfor %}
+    </table>
+</div>
+
+
+
+<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+    <center>
+      <table border="2">
+        <thead>
+        <th>username</th>
+        <th>comment</th>
+        <th>date</th>
+        </thead>
+
+        {% for i in comment %}
+        <tr>
+          <td>{{i.username}}</td>
+          <td>{{i.comment}}</td>
+          <td>{{i.DATE}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </center>
+
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+  <center>
+    <table border="2">
+      <thead>
+      <th>Like_username</th>
+      </thead>
+
+      {% for l in like %}
+      <tr>
+        <td>{{l.like_username}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </center>
+</div>
+</body>
+</html>

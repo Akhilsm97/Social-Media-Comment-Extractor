@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<body lang="en" dir="ltr">
+  <head>
+
+        <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+
+
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/addpost.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <section  id="navbar">
+    <div class="container-fluid">
+      <div style="background-color: lightblue;" class="row nav">
+        <div class="col-sm-2 logo">
+          SocialPoc
+        </div>
+        <div style="background-color: lightblue;" class="col-sm-6">
+        </div>
+
+        <div class="col-sm-1 top_link">
+          <a href="#">About</a>
+        </div>
+        <div class="col-sm-1 top_link">
+          <a href="#">Help</a>
+        </div>
+        <div class="col-sm-2">
+          <div class="dropdown">
+            <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+              <span><i class="fas fa-user-alt"></i></span> {{username}}
+            </div>
+            <div class="dropdown-menu ">
+              <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+  <section>
+        <h3>Profile Picture </h3>
+        <form name="form1" enctype="multipart/form-data" action="/prof_pic/" method="post">
+          {% csrf_token %}
+          profile_pic<input type="file" name="img"multiple><br>
+          <input type="submit" value="OK">
+
+        </form>
+      </section>
+</div>
+
+
+
+  </div>
+</body>
+</html>

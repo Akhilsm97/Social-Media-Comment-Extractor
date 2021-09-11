@@ -93,7 +93,10 @@
                 Search
             </button>
         </form>
-    </div>
+    </div>   <br>
+
+<a href="/profilepic">Profile Pic</a>
+
 
     <section id="all_posts">
 
@@ -102,6 +105,10 @@
 
         {% block search %}
         {% endblock %}
+
+            {% for i in profpic %}
+            <img src=" /media/{{i.profile_pic}}>" >
+             {% endfor %}
 
         {% for p in posts %}
         <div class="row post_area">
@@ -133,6 +140,8 @@
         {% endfor %}
     </section>
 </div>
+
+
 
 {% csrf_token %}
 <script type="text/javascript">

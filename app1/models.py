@@ -18,4 +18,24 @@ class Comments(models.Model):
     comment=models.CharField(max_length=100)
     DATE=models.CharField(max_length=50)
 
+class Addfriendnew(models.Model):
+    username=models.CharField(max_length=50)
+    followingusername=models.CharField(max_length=50)
+    status=models.CharField(max_length=50)
+
+class Admin(models.Model):
+    roll=models.CharField(max_length=50)
+    username=models.CharField(max_length=50)
+
+class Block(models.Model):
+    username=models.CharField(max_length=50)
+    status=models.CharField(max_length=50)
+
+class Profilepic(models.Model):
+    username=models.CharField(max_length=50)
+    profile_pic=models.CharField(max_length=50)
+
+
+
+
 

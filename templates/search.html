@@ -14,12 +14,103 @@
 {% block search%}
 
 {% if search %}
-    <div><h1>you are search for {{search}}</h1></div>
-{% for s in posts %}
+<div><h1>you are search for {{search}}</h1></div>
 
-<div>
+{% for data in data %}
+
+{% if data.status == "0" %}
+<form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
+    <input type="hidden" id="follow" name="follow" value="{{search}}">
+    <input type="hidden" id="followstatus" name="followstatus" value="1">
+            <!--          <label for="search">Search</label>-->
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Follow
+            </button>
+        </form>
+
+{% elif data.status == "1" %}
+<form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
+    <input type="hidden"  name="follow" value="{{search}}">
+    <input type="hidden"  name="followstatus" value="0">
+            <!--          <label for="search">Search</label>-->
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                UnFollow
+            </button>
+
+        </form>
+
+{% else %}
+<form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
+    <input type="hidden"  name="follow" value="{{search}}">
+    <input type="hidden"  name="followstatus" value="1">
+            <!--          <label for="search">Search</label>-->
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Add friend
+            </button>
+        </form>
+
+{% endif %}
+
+{% endfor %}
+
+{% for s in s %}
+
+{% for data in data %}
+{% if data.status == "1" %}
+<div class="row post_area">
+
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-6 post">
+                <div style="margin:10px auto;">
+                    <i class="fas fa-user-circle" style="font-size: 35px;"></i><span id="user">{{s.username}}</span>
+                    <span style="margin-left:280px; font-size:14px;">{{s.time}}</span>
+                </div>
+                <div>
+                    <p>{{s.post_text}}
+                    </p>
+                    <img src="../../media/{{s.post_img}}" alt="" class="responsive">
+                </div>
+                <div class="like_btn">
+                    <span style="margin-right:0px;" id="impr{{s.post_id}}">24</span>
+                    <span><i class="far fa-thumbs-up" id="icon{{s.post_id}}" style="color:black;"></i> <button
+                            class='btn l_btn' id="{{s.post_id}}"> Like</button></span>
+                    <span><i class="far fa-comment"></i> <a href="/app/insertcomment/{{s.post_id}}"> Comment</a></span>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+{% else %}
+<div class="row post_area">
+
+    <div class="col-sm-2">
+    </div>
+
+    <div class="col-sm-4">
+
+            </div>
+</div>
+
+</div>
 
 {{s}}</div>
+{% endif %}
+{% endfor %}
 {% endfor %}
 {% endif %}
 {% endblock %}
