@@ -13,7 +13,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie,csrf_protect,csrf_ex
 
 
 # Create your views here.
-from app1.models import Posts, Likes, Comments, Addfriendnew,Admin,Block,Profilepic
+from app1.models import Posts, Likes, Comments, Addfriend,Admin,Profilepic
 
 
 def search(request):
@@ -23,7 +23,7 @@ def search(request):
         s=Posts.objects.filter(username=searched)
         print(s)
         username = request.session['username']
-        data = Addfriendnew.objects.filter(username=username, followingusername=searched)
+        data = Addfriend.objects.filter(username=username, followingusername=searched)
         if (data.count() == 0):
             data="2"
             print(data)
@@ -138,8 +138,10 @@ def home(request):
     username = request.session['username']
     posts=models.Posts.objects.all()
     likes=models.Likes.objects.all()
-    profpic=Profilepic.objects.all()
-    res = render(request,'home.html',{'username':username,'posts':posts,'likes':likes,'profpic':profpic})
+    request1=Addfriend.objects.filter(followingusername=username)
+    request2=request1.count
+    profilepic=Profilepic.objects.filter(username=username)
+    res = render(request,'home.html',{'username':username,'posts':posts,'likes':likes,'profilepic':profilepic,'request1':request1,'request2':request2})
     return res
 
 def confirm(request):
@@ -160,16 +162,10 @@ def login_page(request):
             request.session['username'] = username
 
             if role1 == "1":
-                user=User.objects.all()
-                block=Block.objects.all()
-                return render(request,"admin.html",{'user':user,'block':block})
+                user = User.objects.all()
+                return render(request,"admin.html",{'user':user})
             elif role1 == "2":
-                block=Block.objects.filter(username=username)
-                if block == "blocked":
-                    return render(request,"blocked.html")
-                else:
-                    return redirect('/home')
-
+                return redirect('/home')
 
         else:
             print("Invalid Credentials")
@@ -206,10 +202,6 @@ def sign_up_page(request):
                 ab.username = username
                 ab.roll = "2"
                 ab.save()
-                bk=Block()
-                bk.username=username
-                bk.status="unblock"
-                bk.save()
                 print("user created")
                 return redirect('/confirmation')
                 # res = render(request,'eyebook/home.html')
@@ -241,21 +233,45 @@ def commentview(request,post_id):
 
 def follow(request):
     if request.method=='POST':
-        ab= Addfriendnew()
+        ab= Addfriend()
         username = request.session['username']
         searched = request.POST.get('follow')
-        data = Addfriendnew.objects.filter(username=username, followingusername=searched)
-        if (data.count() == 0):
+        data = Addfriend.objects.filter(username=username, followingusername=searched)
+        status=request.POST.get('followstatus')
+        print(username)
+        print(searched)
+        print(status)
+        if (status == 1):
             ab.username=username
             ab.followingusername=searched
             ab.status= request.POST.get('followstatus')
+            ab.notification="request send"
             ab.save()
             return redirect('/home')
         else:
-            st= Addfriendnew.objects.get(username=username, followingusername=searched)
+            st= Addfriend.objects.get(username=username, followingusername=searched)
             st.status = request.POST.get('followstatus')
+            st.notification="unfriend"
             st.save()
             return redirect('/home')
+
+def accept(request):
+    if request.method=='POST':
+        ab=Addfriend()
+        ab.status=request.POST.get('followstatus')
+        ab.notification="accepted"
+        ab.save()
+        return redirect('/home')
+
+def decline(request):
+    if request.method=='POST':
+        ab = Addfriend()
+        ab.status = request.POST.get('followstatus')
+        ab.notification="deleted"
+        ab.save()
+        return redirect('/home')
+
+
 
 def admin_view(request,username):
     post=Posts.objects.filter(username=username)
@@ -269,19 +285,20 @@ def post_view(request,post_id):
 
 
 def block(request,username):
-    if request.method=="POST":
-        ac=Block()
-        ac.username=username
-        ac.status=request.POST.get('status')
-        ac.save()
-        return redirect('/login')
+    ac=User.objects.get(username=username)
+    ac.username=username
+    ac.is_active=request.POST.get("status")
+    ac.save()
+    user=User.objects.all()
+    return render(request,"admin.html",{'user':user})
 
 def profile_pic(request):
     return render(request,"profilepic.html")
 
 def prof_pic(request):
-    ab = Profilepic()
-    ab.username=request.session['username']
+    username=request.session['username']
+    ab = Profilepic.objects.get(username=username)
+    ab.username=request.session.get('username')
     profile_pic= request.FILES['img']
     fs = FileSystemStorage()
     filename = fs.save(profile_pic.name, profile_pic)

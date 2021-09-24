@@ -18,10 +18,13 @@ urlpatterns = [
     url('insertcomment/(?P<post_id>\w+)/$',views.newcomment),
     url('comment_new/(?P<post_id>\w+)/$',views.commentview),
     url('follow',views.follow,name='follow'),
+    url('accept',views.accept),
+    url('decline',views.decline),
     url('view_click/(?P<username>\w+)/$',views.admin_view),
     url('post_view/(?P<post_id>\w+)/$',views.post_view),
     url('block/(?P<username>\w+)/$',views.block),
     url('profilepic',views.profile_pic),
     url('prof_pic',views.prof_pic),
+
 
 ]

@@ -34,7 +34,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
-  <body>
+  <body style="background-color:#e5e4d3;">
     <section  id="navbar">
       <div class="container-fluid">
         <div style="background-color: lightblue;" class="row nav">
@@ -53,7 +53,7 @@
           <div class="col-sm-2">
             <div class="dropdown">
               <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                <span><i class="fas fa-user-alt"></i></span> {{username}}
+                <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
               </div>
               <div class="dropdown-menu ">
                 <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
@@ -65,7 +65,7 @@
     </section>
 
     <center>
-    <table border="1">
+    <table border="1" class = "table table-hover table-bordered table-striped">
       <thead>
       <th> User's Name</th>
       <th>Email</th>
@@ -79,13 +79,13 @@
         <td>{{i.first_name}}</td>
         <td>{{i.email}}</td>
         <td><a href="view_click/{{i.username}}">View</a></td>
-        <td>{% for block in block %}
+        <td>
 
-          {% if block.status == "blocked" %}
+          {% if i.is_active == 1 %}
           <form class="col-sm-5" method="POST" action="/block/{{i.username}}/"> {% csrf_token %}
-              <input type="hidden" id="block" name="status" value="blocked">
+              <input type="hidden" id="block" name="status" value="0">
 
-           <button type="submit" class="btn btn-outline-light"
+           <button type="submit" class="btn btn-primary btn-lg btn-block"
 
                     style="
     color: #214569;
@@ -96,9 +96,9 @@
 
         {% else %}
         <form class="col-sm-5" method="POST" action="/block/{{i.username}}/"> {% csrf_token %}
-        <input type="hidden" id="unblock" name="status" value="unblock">
+        <input type="hidden" id="unblock" name="status" value="1">
 
-          <button type="submit" class="btn btn-outline-light"
+          <button type="submit" class="btn btn-secondary btn-lg btn-block"
 
                     style="
     color: #214569;
@@ -106,8 +106,7 @@
                 Unblock
             </button>
         </form>
-          {% endif %}
-      {% endfor %}
+        {% endif %}
       </td>
       </tr>
       {% endif %}

@@ -32,7 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color:#e5e4d3;">
 <section id="navbar">
     <div class="container-fluid">
         <div class="row nav">
@@ -95,8 +95,51 @@
         </form>
     </div>   <br>
 
-<a href="/profilepic">Profile Pic</a>
+    <div>
+    <div class="col-sm-3">
+            <a href="/profilepic">Profile Pic</a><br>
 
+            {% for i in profilepic %}
+            <img src="../..{{i.profile_pic}}" height="100" width="100">
+             {% endfor %}
+    </div>
+    <div class="col-lg-6">
+     {% for i in request1 %}
+     {{i.notification}} from {{i.username}}
+     {{request2}}
+    </div>
+
+    {% if request2 > "0" %}
+
+    <div class="col-lg-3">
+      <form class="col-sm-5" method="POST" action="{% url 'accept'%}"> {% csrf_token %}
+          <input type="hidden" id="followstatus" name="followstatus" value="1">
+      <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Confirm
+            </button>
+      </form>
+
+        <form class="col-sm-5" method="POST" action="{% url 'decline'%}"> {% csrf_token %}
+             <input type="hidden"  name="followstatus" value="0">
+         <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Delete
+            </button>
+        </form>
+    </div>
+
+    {% else %}
+       <div></div>
+    {% endif %}
+    {% endfor %}
+    </div>
 
     <section id="all_posts">
 
@@ -106,9 +149,7 @@
         {% block search %}
         {% endblock %}
 
-            {% for i in profpic %}
-            <img src=" /media/{{i.profile_pic}}>" >
-             {% endfor %}
+
 
         {% for p in posts %}
         <div class="row post_area">
