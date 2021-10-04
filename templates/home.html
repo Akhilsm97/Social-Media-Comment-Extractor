@@ -105,15 +105,18 @@
     </div>
     <div class="col-lg-6">
      {% for i in request1 %}
-     {{i.notification}} from {{i.username}}
+        {% if i.status == "1" %}
+        <div>Notifications - {{request2}}</div>
+        {{i.notification}} from {{i.username}}
      {{request2}}
     </div>
 
-    {% if request2 > "0" %}
+    {% if i.notification == "request send" %}
 
     <div class="col-lg-3">
       <form class="col-sm-5" method="POST" action="{% url 'accept'%}"> {% csrf_token %}
-          <input type="hidden" id="followstatus" name="followstatus" value="1">
+          <input type="hidden" name="acceptusername" value="{{i.username}}">
+          <input type="hidden" id="followstatus" name="followstatus" value="2">
       <button type="submit" class="btn btn-outline-light"
 
                     style="
@@ -124,7 +127,8 @@
       </form>
 
         <form class="col-sm-5" method="POST" action="{% url 'decline'%}"> {% csrf_token %}
-             <input type="hidden"  name="followstatus" value="0">
+            <input type="hidden"  name="declineusername" value="{{i.username}}">
+             <input type="hidden"  name="followstatus" value="3">
          <button type="submit" class="btn btn-outline-light"
 
                     style="
@@ -138,7 +142,21 @@
     {% else %}
        <div></div>
     {% endif %}
+    {% endif %}
     {% endfor %}
+    </div>
+
+
+    <div class="col-lg-6">
+        {% for i in friend %}
+        {% if i.username == username %}
+        {{i.followingusername}},
+
+        {% else %}
+        {{i.username}},
+
+        {% endif %}
+        {% endfor %}
     </div>
 
     <section id="all_posts">

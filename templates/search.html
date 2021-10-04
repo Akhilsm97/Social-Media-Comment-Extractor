@@ -19,7 +19,7 @@
 {% for data in data %}
 
 {% if data.status == "0" %}
-<form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
+<form class="col-sm-5" method="POST" action="{% url 'follow' %}"> {% csrf_token %}
     <input type="hidden" id="follow" name="follow" value="{{search}}">
     <input type="hidden" id="followstatus" name="followstatus" value="1">
             <!--          <label for="search">Search</label>-->
@@ -28,11 +28,26 @@
                     style="
     color: #214569;
     border-color: #10253a;">
-                Friend
+                AddFriend
             </button>
         </form>
 
-{% else %}
+{% elif data.status == "1" %}
+<form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
+    <input type="hidden"  name="follow" value="{{search}}">
+    <input type="hidden"  name="followstatus" value="2">
+            <!--          <label for="search">Search</label>-->
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Confirm
+            </button>
+
+        </form>
+
+{% elif data.status == "2"  %}
 <form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
     <input type="hidden"  name="follow" value="{{search}}">
     <input type="hidden"  name="followstatus" value="0">
@@ -42,11 +57,23 @@
                     style="
     color: #214569;
     border-color: #10253a;">
-                UnFriend
+                Unfriend
             </button>
-
         </form>
+{% else %}
 
+<form class="col-sm-5" method="POST" action="{% url 'follow' %}"> {% csrf_token %}
+ <input type="hidden"  name="follow" value="{{search}}">
+    <input type="hidden"  name="followstatus" value="1">
+            <!--          <label for="search">Search</label>-->
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                 Add friend
+            </button>
+</form>
 {% endif %}
 
 {% endfor %}
@@ -54,7 +81,7 @@
 {% for s in s %}
 
 {% for data in data %}
-{% if data.status == "1" %}
+{% if data.status == "2" %}
 <div class="row post_area">
 
             <div class="col-sm-2">
@@ -92,9 +119,7 @@
             </div>
 </div>
 
-</div>
 
-</div>
 {% endif %}
 {% endfor %}
 {% endfor %}

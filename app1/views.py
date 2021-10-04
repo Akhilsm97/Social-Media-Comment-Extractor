@@ -23,10 +23,10 @@ def search(request):
         s=Posts.objects.filter(username=searched)
         print(s)
         username = request.session['username']
-        data = Addfriend.objects.filter(username=username, followingusername=searched)
+        data = Addfriend.objects.filter(username=searched, followingusername=username) | Addfriend.objects.filter(username=username,followingusername=searched)
         if (data.count() == 0):
-            data="2"
-            print(data)
+            data="8"
+
         return render(request, 'search.html',{'search':searched , 's':s ,'data':data})
     return render(request, 'search.html')
 
@@ -138,10 +138,13 @@ def home(request):
     username = request.session['username']
     posts=models.Posts.objects.all()
     likes=models.Likes.objects.all()
-    request1=Addfriend.objects.filter(followingusername=username)
-    request2=request1.count
-    profilepic=Profilepic.objects.filter(username=username)
-    res = render(request,'home.html',{'username':username,'posts':posts,'likes':likes,'profilepic':profilepic,'request1':request1,'request2':request2})
+    print(username)
+    request1 = Addfriend.objects.filter(followingusername=username,status=1)
+    request2 = request1.count
+    profilepic = Profilepic.objects.filter(username=username)
+    friend=Addfriend.objects.all()
+    res = render(request,'home.html',{'username':username,'posts':posts,'likes':likes,'profilepic':profilepic,'request1':request1,
+                                      'request2':request2,'friend':friend})
     return res
 
 def confirm(request):
@@ -233,15 +236,16 @@ def commentview(request,post_id):
 
 def follow(request):
     if request.method=='POST':
-        ab= Addfriend()
+        print("hello")
         username = request.session['username']
         searched = request.POST.get('follow')
-        data = Addfriend.objects.filter(username=username, followingusername=searched)
+
         status=request.POST.get('followstatus')
         print(username)
         print(searched)
         print(status)
-        if (status == 1):
+        ab = Addfriend()
+        if (status == "1"):
             ab.username=username
             ab.followingusername=searched
             ab.status= request.POST.get('followstatus')
@@ -249,7 +253,7 @@ def follow(request):
             ab.save()
             return redirect('/home')
         else:
-            st= Addfriend.objects.get(username=username, followingusername=searched)
+            st= Addfriend.objects.get(username=searched, followingusername=username)
             st.status = request.POST.get('followstatus')
             st.notification="unfriend"
             st.save()
@@ -257,7 +261,11 @@ def follow(request):
 
 def accept(request):
     if request.method=='POST':
-        ab=Addfriend()
+        followingusername = request.session['username']
+        username = request.POST.get('acceptusername')
+        print(followingusername)
+        print(username)
+        ab = Addfriend.objects.get(username=username, followingusername=followingusername)
         ab.status=request.POST.get('followstatus')
         ab.notification="accepted"
         ab.save()
@@ -265,12 +273,13 @@ def accept(request):
 
 def decline(request):
     if request.method=='POST':
-        ab = Addfriend()
+        followingusername = request.session['username']
+        username = request.POST.get('declineusername')
+        ab = Addfriend.objects.get(username=username, followingusername=followingusername)
         ab.status = request.POST.get('followstatus')
         ab.notification="deleted"
         ab.save()
         return redirect('/home')
-
 
 
 def admin_view(request,username):
