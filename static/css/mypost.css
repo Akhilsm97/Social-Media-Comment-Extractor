@@ -1,0 +1,90 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css";
+body{
+  /* background-color: #e9ebee; */
+}
+.logo{
+  font-family: 'Zhi Mang Xing', cursive;
+  font-size: 35px;
+  width:50%;
+  /* margin-left: 20px; */
+  padding-left: 20px;
+}
+/* .right_side{
+  width:50%;
+  font-family: 'Acme', sans-serif;
+} */
+
+.dropdown{
+  padding: 10px 15px;
+}
+span{
+  padding-right: 10px;
+}
+.top_link{
+  padding-top: 15px;
+}
+.top_link a{
+  text-decoration: none;
+}
+.nav{
+
+    background-color: lightblue;
+
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.post_area{
+  /* border: 1px solid black; */
+}
+.post{
+  border: 1px solid black;
+  box-shadow: 1px 1px 3px 3px #e0e0d1;
+}
+.post img{
+  width: 550px;
+}
+.like_btn{
+    margin: 10px 10px;
+}
+.like_btn span{
+  padding: 10px;
+  margin-right: 20px;
+}
+
+#all_posts .row{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#user{
+font-size: 25px;
+margin-left:15px;
+font-family: 'Arvo', serif;
+}
+
+/* #my_div:active{
+    border-bottom:4px solid grey;
+} */
+
+
+.opt a{
+  /* display : block; */
+  text-align: center;
+  /* border-bottom: 3px solid transparent; */
+}
+/* .link a:hover{
+  border-bottom:4px solid grey;
+} */
+.line{
+  width: 120px;
+  height:3px;
+  margin-left: 15px;
+  margin-top: 3px;
+  background-color: grey;
+}

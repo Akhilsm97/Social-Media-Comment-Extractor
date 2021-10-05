@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+
+        <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+
+
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/addpost.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body style="background-color:#e5e4d3;">
+    <section  id="navbar">
+      <div class="container-fluid">
+        <div style="background-color: lightblue;" class="row nav">
+          <div class="col-sm-2 logo">
+           SocialPoc
+          </div>
+          <div style="background-color: lightblue;" class="col-sm-6">
+          </div>
+
+          <div class="col-sm-1 top_link">
+            <a href="#">About</a>
+          </div>
+          <div class="col-sm-1 top_link">
+            <a href="#">Help</a>
+          </div>
+          <div class="col-sm-2">
+            <div class="dropdown">
+              <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
+              </div>
+              <div class="dropdown-menu ">
+                <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <center>
+    <table border="1" class = "table table-hover table-bordered table-striped">
+      <thead>
+      <th> User's Name</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+      </thead>
+
+      {% for i in user %}
+      {% if i.first_name != "admin" %}
+      <tr>
+        <td>{{i.first_name}}</td>
+        <td>{{i.email}}</td>
+        <td><a href="view_click/{{i.username}}">View</a></td>
+        <td>
+
+          {% if i.is_active == 1 %}
+          <form class="col-sm-5" method="POST" action="/block/{{i.username}}/"> {% csrf_token %}
+              <input type="hidden" id="block" name="status" value="0">
+
+           <button type="submit" class="btn btn-primary btn-lg btn-block"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Block
+            </button>
+        </form>
+
+        {% else %}
+        <form class="col-sm-5" method="POST" action="/block/{{i.username}}/"> {% csrf_token %}
+        <input type="hidden" id="unblock" name="status" value="1">
+
+          <button type="submit" class="btn btn-secondary btn-lg btn-block"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Unblock
+            </button>
+        </form>
+        {% endif %}
+      </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+    </center>
+
+
+
+  </body>
+</html>

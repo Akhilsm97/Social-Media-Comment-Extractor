@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+
+        <style>
+      .nav{
+  background-color: lightblue;
+}
+.navhead{
+  margin: 20px auto;
+}
+.navhead a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.btn-outline-light {
+    color: #214569;
+    border-color: #10253a;
+}
+
+
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/addpost.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body style="background-color:#e5e4d3;">
+    <section  id="navbar">
+      <div class="container-fluid">
+        <div style="background-color: lightblue;" class="row nav">
+          <div class="col-sm-2 logo">
+           SocialPoc
+          </div>
+          <div style="background-color: lightblue;" class="col-sm-6">
+          </div>
+
+          <div class="col-sm-1 top_link">
+            <a href="#">About</a>
+          </div>
+          <div class="col-sm-1 top_link">
+            <a href="#">Help</a>
+          </div>
+          <div class="col-sm-2">
+            <div class="dropdown">
+              <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
+              </div>
+              <div class="dropdown-menu ">
+                <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<body>
+<form action="/comment_new/{{post_id}}/" method="POST">
+{% csrf_token %}
+    <center>comment<input type="text" name="comment" style="margin:50px auto;"></center>>
+    <center><input type="submit" value="OK" style="margin:10px auto;"></center>
+</form>
+<center><h1>Comments</h1><br></center>
+<table border="2" class = "table table-hover table-bordered table-striped">
+    <th>Username</th>
+    <th>Comment</th>
+    <th>Date</th>
+{% for i in ob %}
+<tr>
+    <td><center><b>{{i.username}}</b></center></td>
+    <td><center><b>{{i.comment}}</b></center></td>
+    <td><center></b>{{i.DATE}}</center></td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
