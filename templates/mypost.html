@@ -41,17 +41,17 @@
       <div class="container-fluid">
         <div style="background-color: lightblue;" class="row nav">
           <div class="col-sm-2 logo">
-            SocialPoc
+            SocialApp
           </div>
           <div class="col-sm-6">
           </div>
 
           <div class="col-sm-1 top_link">
-            <a href="#">About</a>
+            <a href="/landingPage">Home</a>
           </div>
-          <div class="col-sm-1 top_link">
-            <a href="#">Help</a>
-          </div>
+<!--          <div class="col-sm-1 top_link">-->
+<!--            <a href="#">Help</a>-->
+<!--          </div>-->
           <div class="col-sm-2">
             <div class="dropdown">
               <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -79,11 +79,15 @@
           <div class="line">
 
           </div>
+
         </div>
         <div class="col-sm-2 text-center">
           <a href="/addpost">Add Post</a>
         </div>
-         <form class="col-sm-5" method="POST" action="{% url 'search' %}">{% csrf_token %}
+        <div class="col-sm-2 text-center">
+            <a href="/app/findfriend">Find</a>
+        </div>
+         <form class="col-sm-3" method="POST" action="{% url 'search' %}">{% csrf_token %}
             <!--          <label for="search">Search</label>-->
             <input type="text" id="search" name="search" value="">
             <button type="submit" class="btn btn-outline-light"

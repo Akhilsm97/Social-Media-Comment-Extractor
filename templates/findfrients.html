@@ -1,0 +1,583 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Social App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Exchange Education a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //For-Mobile-Apps -->
+
+<!-- Custom Theme files -->
+    <!-- Bootstrap Styling --> <link rel='stylesheet' href="{% static 'css1/bootstrap.css' %}" type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> <script src="{% static 'js1/jquery.min.js' %}"></script>
+    <!-- Bootstrap-Working-File --> <script src="{% static 'js1/bootstrap.min.js' %}"></script>
+    <!-- Index-Page-Styling --> <link rel="stylesheet" href="{% static 'css1/style.css' %}" type="text/css" media="all" />
+	<!-- Owl-Carousel-Styling --> <link rel="stylesheet" href="{% static 'css1/owl.carousel.css' %}" type="text/css" media="all">
+<!-- //Custom Theme files -->
+
+<!-- Smooth-Scrolling -->
+<script type="text/javascript" src="{% static 'js1/move-top.js' %}"></script>
+<script type="text/javascript" src="{% static 'js1/easing.js' %}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+        });
+    });
+</script>
+<!-- //Smooth-Scrolling -->
+
+<!-- Calender-JavaScript -->
+	<link rel="stylesheet" href="{% static 'css/clndr.css' %}" type="text/css" />
+	<script src="{% static 'js1/underscore-min.js' %}" type="text/javascript"></script>
+	<script src= "{% static 'js1/moment-2.2.1.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js1/clndr.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js1/site.js' %}" type="text/javascript"></script>
+<!-- //Calender-JavaScript -->
+
+</head>
+
+<!-- Body-Starts-Here -->
+<body>
+
+	<!-- Header-Starts-Here -->
+	<div class="header">
+
+		<!-- Navbar-Starts-Here -->
+	    <nav class="navbar navbar-inverse">
+	        <div class="container">
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	                    <span class="sr-only">Toggle navigation</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+
+	                <!-- Logo --><a class="navbar-brand" href="#">Social App</a><!-- //Logo -->
+
+	            </div>
+	            <!-- Navbar-Collapse -->
+	            <div id="navbar" class="navbar-collapse collapse">
+
+	                <ul class="nav navbar-nav navbar-right">
+                            <li><a onclick="window.location.href='/app/home';" class="scroll">Home</a>
+								<li><a onclick="window.location.href='/app/mypost';" class="scroll">My Post</a></li>
+						<li><a onclick="window.location.href='/app/addpost';" class="scroll">Add Post</a></li>
+						<li><a onclick="window.location.href='/app/findfriend';" class="scroll">Find Friends</a></li>
+		                <!--<li><a href="#about" class="scroll">About</a></li>-->
+                                <!--<li><a onclick="window.location.href='viewaluminidetails.jsp';" class="scroll">View Alumini Details</a></li>-->
+		                <!-- Dropdown -->
+<!--		                <li role="presentation" class="dropdown carat1">-->
+<!--			                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADD<span class="caret"></span> </a>-->
+<!--				                <ul class="dropdown-menu dropdown1">-->
+<!--                                                    <li><a onclick="window.location.href='AddTeachers.php';">Add Staff</a></li>-->
+<!--                                                    <li><a onclick="window.location.href='addStudents.php';" class="scroll">Add Students</a></li>-->
+<!--					                &lt;!&ndash;<li><a onclick="window.location.href='addnonteaching.jsp';" class="scroll">Add Non Teaching</a></li>&ndash;&gt;-->
+<!--					                &lt;!&ndash;<li><a onclick="window.location.href='addparent.jsp';" class="scroll">Add Parents</a></li>&ndash;&gt;-->
+<!--                                                        <li><a onclick="window.location.href='addnotification.php';" class="scroll">Add Notifications</a></li>-->
+<!--                                                        <li><a onclick="window.location.href='addcourse.php';" class="scroll">Add Course</a></li>-->
+<!--				                </ul>-->
+<!--		                </li>-->
+<!--                                <li role="presentation" class="dropdown carat1">-->
+<!--			                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">VIEW<span class="caret"></span> </a>-->
+<!--				                <ul class="dropdown-menu dropdown1">-->
+<!--					    		<li><a onclick="window.location.href='viewteachers.php';" class="scroll">View Staff</a></li>-->
+<!--		                			<li><a onclick="window.location.href='viewstudents.php';" class="scroll">View Students</a></li>-->
+<!--					                &lt;!&ndash;<li><a onclick="window.location.href='viewnonteaching.jsp';" class="scroll">View Non Teaching</a></li>&ndash;&gt;-->
+<!--					                &lt;!&ndash;<li><a onclick="window.location.href='viewparents.jsp';" class="scroll">View Parents</a></li>&ndash;&gt;-->
+<!--                                                        <li><a onclick="window.location.href='viewpayments.php';" class="scroll">View Payments</a></li>-->
+<!--                                                        &lt;!&ndash;<li><a onclick="window.location.href='viewaluminidetails.jsp';" class="scroll">View Alumini Details</a></li>&ndash;&gt;-->
+<!--				                </ul>-->
+<!--		                </li>-->
+<!--                                <li role="presentation" class="dropdown carat1">-->
+<!--			                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">DELETE<span class="caret"></span> </a>-->
+<!--				                <ul class="dropdown-menu dropdown1">-->
+<!--					    		<li><a onclick="window.location.href='deleteteacher.php';" class="scroll">Delete Staff</a></li>-->
+<!--		                			<li><a onclick="window.location.href='deletestudent.php';" class="scroll">Delete Students</a></li>-->
+<!--					                &lt;!&ndash;<li><a onclick="window.location.href='deletenonteaching.jsp';" class="scroll">Delete Non Teaching</a></li>&ndash;&gt;-->
+<!--					                &lt;!&ndash;<li><a onclick="window.location.href='deleteparent.jsp';" class="scroll">Delete Parents</a></li>&ndash;&gt;-->
+<!--                                                        &lt;!&ndash;<li><a onclick="window.location.href='viewaluminidetails.jsp';" class="scroll">View Alumini Details</a></li>&ndash;&gt;-->
+<!--				                </ul>-->
+<!--		                </li>-->
+		                <!-- //Dropdown -->
+
+					    <!--<li><a onclick="window.location.href='addnotification.jsp';" class="scroll">Add Notification</a></li>-->
+                                            <li><a onclick="window.location.href='/logout';" class="scroll">Logout</a></li>
+
+		                <!-- Login-Button -->
+<!--		                <li>
+			                <div class="login-pop">
+				                <div id="loginpop">
+					                <a href="#" id="loginButton"><span>Login</span></a>
+					                <div id="loginBox">
+						                <form id="loginForm">
+							                <fieldset id="body">
+								                <fieldset>
+									                <label for="email">Email Address</label>
+									                <input type="text" name="email" id="email">
+								                </fieldset>
+								                <fieldset>
+									                <label for="password">Password</label>
+									                <input type="password" name="password" id="password">
+								                </fieldset>
+									                <input type="submit" id="login" value="LOGIN">
+									                <label for="checkbox"><input type="checkbox" id="checkbox"> <i>Remember me</i></label>
+								            </fieldset>
+							                <span><a href="#">Forgot your password?</a></span>
+						                </form>
+					                </div>
+				                </div>
+			                </div>
+			                <script src="js/menu_jquery.js"></script>
+		                </li>-->
+		                <!-- //Login-Button -->
+
+		                <!-- Signup-Button -->
+<!--		                <li>
+			                <div class="login-pop">
+				                <div id="loginpop">
+					                <a href="#" id="signupButton"><span>Signup</span></a>
+					                <div id="signupBox">
+						                <form id="signupForm">
+							                <fieldset id="body">
+								                <fieldset>
+									                <label for="email">Name</label>
+									                <input type="text" name="email" id="email">
+								                </fieldset>
+								                <fieldset>
+								                	<label for="email">Email</label>
+								                	<input type="text" name="email" id="email">
+								                </fieldset>
+								                <fieldset>
+								                	<label for="email">Username</label>
+								                	<input type="text" name="email" id="email">
+								                </fieldset>
+								                <fieldset>
+								                	<label for="password">Password</label>
+								                	<input type="password" name="password" id="password">
+								                </fieldset>
+							                		<input type="submit" id="login" value="SIGNUP">
+							                </fieldset>
+						                </form>
+					                </div>
+				                </div>
+			                </div>
+					        <script src="js/signup_jquery.js"></script>
+		                </li>-->
+		                <!-- //Signup-Button -->
+
+	                </ul>
+
+	            </div>
+	            <!-- //Navbar-Collapse -->
+
+	        </div>
+	    </nav>
+	    <!-- //Navbar-Ends-Here -->
+
+		<!-- Carousel-Starts-Here -->
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+				<li data-target="#myCarousel" data-slide-to="3"></li>
+				<li data-target="#myCarousel" data-slide-to="4"></li>
+			</ol>
+
+<!--			<div class="carousel-inner" role="listbox">-->
+<!--				<div class="item active">-->
+<!--					<img class="first-slide" src="{% static 'images1/0.jpg' %}" alt="First Slide">-->
+<!--				</div>-->
+
+<!--				<div class="item">-->
+<!--					<img class="second-slide" src="{% static 'images1/1.jpg' %}" alt="Second Slide">-->
+<!--				</div>-->
+
+<!--				<div class="item">-->
+<!--					<img class="second-slide" src="{% static 'images1/2.jpg' %}" alt="Second Slide">-->
+<!--				</div>-->
+
+<!--				<div class="item">-->
+<!--					<img class="third-slide" src="{% static 'images1/3.jpg' %}" alt="Third Slide">-->
+<!--				</div>-->
+
+<!--				<div class="item">-->
+<!--					<img class="sixth-slide" src="{% static 'images1/6.jpg' %}" alt="Sixth Slide">-->
+<!--				</div>-->
+
+<!--				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">-->
+<!--					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+<!--					<span class="sr-only">Previous</span>-->
+<!--				</a>-->
+
+<!--				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">-->
+<!--					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+<!--					<span class="sr-only">Next</span>-->
+<!--				</a>-->
+<!--			</div>-->
+		</div>
+		<!-- //Carousel-Ends-Here -->
+
+	</div>
+	<!-- Header-Ends-Here -->
+<form class="col-sm-3" method="POST" action="/search">{% csrf_token %}
+            <!--          <label for="search">Search</label>-->
+            <input type="text" id="search" name="search" value="">
+            <button type="submit" class="btn btn-outline-light"
+
+                    style="
+    color: #214569;
+    border-color: #10253a;">
+                Search
+            </button>
+        </form>
+    <!-- Content-Starts-Here -->
+    <div class="content">
+    	
+    	<!-- Heading --><h1 class="abbr">FIND MY FRIENDS</h1><!-- //Heading -->
+
+    	<div class="container">
+
+			 <div class="faculty slideanim" id="faculty">
+<!--	            <h3>FACULTY</h3>-->
+	             {% for i in user %}
+				 <div class="col-md-3 col-sm-3 team-top">
+						<div class="view view-seventh">
+							<a href="/app/addFriendclick/{{i.username}}"><img class="img-responsive" src="../..{{i.profile_pic}}" alt="name" maxheight="300" width="300"></a>
+								<div class="mask">
+<!--									<ul class="social">-->
+<!--										<li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--										<li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--										<li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--									</ul>-->
+								</div>
+			                    <h6>{{i.username}}</h6>
+			                    <p>Click to Request</p>
+                   		</div>
+					</div>
+				 {% endfor %}
+
+<!--					<div class="col-md-3 col-sm-3 team-top team-in">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f2.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>Mike Hannigan</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--                   		 </div>-->
+<!--					</div>-->
+<!--					<div class="col-md-3 col-sm-3 team-top">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f3.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>Chandler Bing</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--                   		</div>-->
+<!--					</div>-->
+<!--					<div class="col-md-3 col-sm-3 team-top top-team">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f4.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>Rachel Green</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--			            </div>-->
+<!--					</div>-->
+<!--					<div class="col-md-3 col-sm-3 team-top top-team">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f5.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>Janice Hank</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--			            </div>-->
+<!--					</div>-->
+<!--					<div class="col-md-3 col-sm-3 team-top top-team">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f6.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>Boris Johnson</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--			            </div>-->
+<!--					</div>-->
+<!--					<div class="col-md-3 col-sm-3 team-top top-team">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f7.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>Leslie Chow</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--			            </div>-->
+<!--					</div>-->
+<!--					<div class="col-md-3 col-sm-3 team-top top-team">-->
+<!--						<div class="view view-seventh">-->
+<!--							<a href="#"><img class="img-responsive" src="{% static 'images1/f8.jpg' %}" alt="name"></a>-->
+<!--								<div class="mask">-->
+<!--			 						<ul class="social">-->
+<!--							            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--							            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--							            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--							        </ul>-->
+<!--			                    </div>-->
+<!--			                    <h6>James May</h6>-->
+<!--			                    <p>But I must explain to you how all this mistaken idea of denouncing</p>-->
+<!--			            </div>-->
+<!--					</div>-->
+					<div class="clearfix"> </div>
+	        </div>
+
+    		
+    		<!-- About-Starts-Here -->
+<!--    		<div class="about slideanim" id="about">-->
+<!--	            <h2>ABOUT</h2>-->
+<!--	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+
+<!--                <div class="about-info slideanim">-->
+<!--                    <div class="col-md-6 col-sm-6" id="about-pic">-->
+<!--                        <img src="{% static 'images1/9.jpg' %}" alt="About">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6 col-sm-6" id="about-p">-->
+<!--                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum velit esse cillum dolore.</p>-->
+<!--                        <span>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum velit esse cillum dolore."</span>-->
+<!--                    </div>-->
+<!--                    <div class="clearfix"></div>-->
+<!--                </div>-->
+<!--    		</div>-->
+    		<!-- //About-Ends-Here -->
+
+    		<!-- Foreword-Starts-Here -->
+<!--    		<div class="foreword slideanim" id="foreword">-->
+<!--    			<h3>FOREWORD</h3>-->
+<!--    			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>-->
+<!--                <span>Johann Schmidt</span>-->
+<!--                <span>Vice-Chancellor</span>-->
+<!--    		</div>-->
+<!--    		&lt;!&ndash; //Foreword-Ends-Here &ndash;&gt;-->
+
+<!--			&lt;!&ndash; Admissions-Starts-Here &ndash;&gt;-->
+<!--        	<div class="admissions slideanim" id="admissions">-->
+<!--                <h3>ADMISSIONS-2016 PROSPECTUS</h3>-->
+<!--                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum velit esse cillum dolore eu fugiat nulla pariatur commodo. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+
+<!--                &lt;!&ndash; Add a PDF file and give its link here if required &ndash;&gt;-->
+<!--                <div class="pdf">-->
+<!--                	<a href="#"><sup>[PDF]</sup>Admissions</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--			&lt;!&ndash; //Admissions-Ends-Here &ndash;&gt;-->
+
+<!--			&lt;!&ndash; Alumnus-Starts-Here &ndash;&gt;-->
+<!--    		<div class="alumnus slideanim" id="alumnus">-->
+<!--                <h3>ALUMNUS</h3>-->
+<!--                <div class="alumnus-grid">-->
+<!--	                <div class="col-md-4 col-sm-4 a1">-->
+<!--	                    <h4>Lorem</h4>-->
+<!--	                    <img src="{% static 'images1/6.jpg' %}" alt="alumnus">-->
+<!--	                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--	                </div>-->
+<!--	                <div class="col-md-4 col-sm-4 a1">-->
+<!--	                    <h4>Ipsum</h4>-->
+<!--	                    <img src="{% static 'images1/4.jpg' %}" alt="alumnus">-->
+<!--	                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--	                </div>-->
+<!--	                <div class="col-md-4 col-sm-4 a1">-->
+<!--	                    <h4>Dolores</h4>-->
+<!--	                    <img src="{% static 'images1/9.jpg' %}" alt="alumnus">-->
+<!--	                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--	                </div>-->
+<!--	                <div class="clearfix"></div>-->
+<!--            	</div>-->
+<!--            </div>-->
+			<!-- //Alumnus-Ends-Here -->
+
+			<!-- Programs-Starts-Here -->
+<!--            <div class="programs slideanim" id="programs">-->
+<!--	            <h3>PROGRAMS</h3>-->
+<!--	            <p>Lorem Ipsum Dolor Sit Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>-->
+
+<!--	            <div class="program-grid">-->
+<!--		            <div class="col-md-3 col-sm-6 p1">-->
+<!--		                <div class="program1">-->
+<!--		                    <h4>Lorem</h4>-->
+<!--		                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--		                </div>-->
+<!--		            </div>-->
+<!--		            <div class="col-md-3 col-sm-6 p1">-->
+<!--		                <div class="program2">-->
+<!--		                    <h4>Ipsum</h4>-->
+<!--		                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--		                </div>-->
+<!--		            </div>-->
+<!--		            <div class="col-md-3 col-sm-6 p1">-->
+<!--		                <div class="program3">-->
+<!--		                    <h4>Dolor</h4>-->
+<!--		                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--		                </div>-->
+<!--		            </div>-->
+<!--		            <div class="col-md-3 col-sm-6 p1">-->
+<!--		                <div class="program4">-->
+<!--		                    <h4>Sitamet</h4>-->
+<!--		                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--		                </div>-->
+<!--		            </div>-->
+<!--		            <div class="clearfix"></div>-->
+<!--	            </div>-->
+<!--        	</div>-->
+			<!-- //Programs-Ends-Here -->
+
+
+    	</div>
+
+
+
+    </div>
+    <!-- Content-Ends-Here -->
+
+
+
+<!-- Footer-Starts-Here -->
+    <div class="footer slideanim">
+
+    	<div class="container">
+
+	    	<div class="footer-info slideanim">
+<!--				<div class="col-md-6 col-sm-6 access f1">-->
+<!--					<h3 class="access-h3">Access</h3>-->
+<!--	    			<p class="access-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation, sed do eiusmod ullamco laboris nisi ut enim ad minim aliquip ex ea commodo consequat.</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-4 col-sm-4 f2">-->
+<!--					<h3 class="address">Address</h3>-->
+<!--	    			<address>-->
+<!--	                    <ul>-->
+<!--	                    	<li>Parma Via Modena</li>-->
+<!--	                    	<li>40019 Sant'Agata Bolognese</li>-->
+<!--	                    	<li>BO, Italy</li>-->
+<!--	                    	<li>Telephone : +1 (734) 123-4567</li>-->
+<!--	                    	<li>Email : <a class="mail" href="mailto:mail@example.com">info(at)sseet.com</a></li>-->
+<!--	                    </ul>-->
+<!--	               </address>-->
+<!--				</div>-->
+<!--				<div class="col-md-2 col-sm-2 f3" id="qlinks">-->
+<!--	    		    <h3>Links</h3>-->
+<!--	    			<ul class="footer_list">-->
+<!--	    				<li><a href="#about" class="scroll">About</a></li>-->
+<!--	    				<li><a href="#programs" class="scroll">Programs</a></li>-->
+<!--	    				<li><a href="#services" class="scroll">Services</a></li>-->
+<!--	    				<li><a href="#edifice" class="scroll">Edifice</a></li>-->
+<!--	    				<li><a href="#project" class="scroll">Projects</a></li>-->
+<!--	    			</ul>-->
+<!--	    		</div>-->
+<!--	    		<div class="clearfix"></div>-->
+<!--			</div>-->
+
+<!--	        <ul class="social slideanim" id="follow">-->
+<!--	            <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
+<!--	            <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
+<!--	            <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>-->
+<!--	            <li><a href="#" class="instagram" title="Go to Our Instagram Account"></a></li>-->
+<!--	            <li><a href="#" class="youtube" title="Go to Our Youtube Channel"></a></li>-->
+<!--	        </ul>-->
+
+	        <div class="copyright">
+	            <p>&copy;   </p>
+	        </div>
+
+        </div>
+
+        <!-- Slide-To-Top JavaScript (No-Need-To-Change) -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                /*
+                var defaults = {
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
+                };
+                */
+                $().UItoTop({ easingType: 'easeOutQuart' });
+            });
+        </script>
+        <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+        <!-- //Slide-To-Top JavaScript -->
+
+    </div>
+    <!-- //Footer-Ends-Here -->
+
+    <script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Prevent default anchor click behavior
+    event.preventDefault();
+
+    // Store hash
+    var hash = this.hash;
+
+    // Using jQuery's animate() method to add smooth page scroll
+    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+    $('html, body').animate({
+      scrollTop: $(hash).offset().top
+    }, 900, function(){
+
+      // Add hash (#) to URL when done scrolling (default click behavior)
+      window.location.hash = hash;
+    });
+  });
+
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+
+</body>
+<!-- Body-Ends-Here -->
+
+</html>

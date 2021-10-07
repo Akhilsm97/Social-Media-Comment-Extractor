@@ -32,6 +32,13 @@ class Profilepic(models.Model):
     username=models.CharField(max_length=50)
     profile_pic=models.CharField(max_length=50)
 
+class Clusters(models.Model):
+    cluster = models.CharField(max_length=100)
+    comment = models.CharField(max_length=100)
+
+class ClustersNames(models.Model):
+    cluster = models.CharField(max_length=100)
+
 
 
 

@@ -44,12 +44,10 @@
           <div style="background-color: lightblue;" class="col-sm-6">
           </div>
 
-          <div class="col-sm-1 top_link">
-            <a href="#">About</a>
-          </div>
-          <div class="col-sm-1 top_link">
-            <a href="#">Help</a>
-          </div>
+          <div class="col-sm-2 text-center">
+            <a href="/app/home">Home</a>
+        </div>
+
           <div class="col-sm-2">
             <div class="dropdown">
               <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -66,9 +64,10 @@
 <body>
 <form action="/comment_new/{{post_id}}/" method="POST">
 {% csrf_token %}
-    <center>comment<input type="text" name="comment" style="margin:50px auto;"></center>>
-    <center><input type="submit" value="OK" style="margin:10px auto;"></center>
+    <center>Comment :<input type="text" name="comment" style="margin:20px auto;"></center>>
+    <center><input type="submit" value="ADD" class="btn btn-success"></center>
 </form>
+<br><br>
 <center><h1>Comments</h1><br></center>
 <table border="2" class = "table table-hover table-bordered table-striped">
     <th>Username</th>
@@ -78,7 +77,7 @@
 <tr>
     <td><center><b>{{i.username}}</b></center></td>
     <td><center><b>{{i.comment}}</b></center></td>
-    <td><center></b>{{i.DATE}}</center></td>
+    <td><center></br>{{i.DATE}}</center></td>
 </tr>
 {% endfor %}
 </table>

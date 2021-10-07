@@ -25,6 +25,9 @@ urlpatterns = [
     url('block/(?P<username>\w+)/$',views.block),
     url('profilepic',views.profile_pic),
     url('prof_pic',views.prof_pic),
-
-
+    url('landingPage',views.landingPage),
+    url('findfriend',views.findfriend),
+    url('addFriendclick/(?P<username>\w+)/$',views.addFriendclick),
+    url('viewCluster/(?P<post_id>\w+)/$',views.viewCluster),
+    url('adminHome',views.adminHome),
 ]

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'socialpoc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gitlab',
+        'NAME': 'social',
         'USER':'root',
         'PASSWD':'',
         'HOST':'LOCALHOST',
