@@ -39,17 +39,17 @@
       <div class="container-fluid">
         <div style="background-color: lightblue;" class="row nav">
           <div class="col-sm-2 logo">
-           SocialPoc
+           SocialApp
           </div>
           <div style="background-color: lightblue;" class="col-sm-6">
           </div>
 
           <div class="col-sm-1 top_link">
-            <a href="#">About</a>
+            <a href="/landingPage">Home</a>
           </div>
-          <div class="col-sm-1 top_link">
-            <a href="#">Help</a>
-          </div>
+<!--          <div class="col-sm-1 top_link">-->
+<!--            <a href="#">Help</a>-->
+<!--          </div>-->
           <div class="col-sm-2">
             <div class="dropdown">
               <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -77,11 +77,12 @@
         </div>
         <div class="col-sm-2 text-center">
           <a href="/addpost">Add Post</a>
-          <div class="line">
 
-          </div>
         </div>
-        <form class="col-sm-5" method="POST" action="{% url 'search' %}">{% csrf_token %}
+        <div class="col-sm-2 text-center">
+            <a href="/app/findfriend">Find</a>
+        </div>
+        <form class="col-sm-3" method="POST" action="{% url 'search' %}">{% csrf_token %}
             <!--          <label for="search">Search</label>-->
             <input type="text" id="search" name="search" value="">
             <button type="submit" class="btn btn-outline-light"
@@ -95,7 +96,7 @@
       </div>
 
       <section id="addpost">
-        <h3>Create Post </h3>
+        <h3>Create A Post... </h3>
         <form class="" enctype="multipart/form-data" method="post">
           {% csrf_token %}
           <!-- <input type="text" name="" value="" placeholder="Enter Some text here ..."> -->
@@ -105,9 +106,9 @@
           <!-- &nbsp;&nbsp; -->
           <!-- <button type="submit" name="button" formaction="/upload"><i class="fas fa-upload"></i></button> -->
           <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-          <button type="button" name="" id="prev_btn">Preview</button>
+          <button type="button" name="" id="prev_btn" class="btn btn-success">Preview</button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <button type="submit" name="button" formaction="/add">Submit</button>
+          <button type="submit" name="button" formaction="/add" class="btn btn-danger">Submit</button>
           <!-- onclick="document.getElementByClass('prev').style.display = 'visible';" -->
         </form>
       </section>

@@ -44,12 +44,12 @@
           <div style="background-color: lightblue;" class="col-sm-6">
           </div>
 
-          <div class="col-sm-1 top_link">
-            <a href="#">About</a>
+           <div class="col-sm-1 top_link">
+            <a href="/adminHome">Home</a>
           </div>
-          <div class="col-sm-1 top_link">
-            <a href="#">Help</a>
-          </div>
+<!--          <div class="col-sm-1 top_link">-->
+<!--            <a href="#">Help</a>-->
+<!--          </div>-->
           <div class="col-sm-2">
             <div class="dropdown">
               <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -65,11 +65,12 @@
     </section>
 
   <center>
-      <table border="1" class = "table table-hover table-bordered table-striped">
+      <h2>View User Posts</h2>
+      <table border="2" class = "table table-hover table-bordered table-striped">
           <thead>
-          <th>Post_Upload_Date</th>
-          <th>Post_Text</th>
-          <th></th>
+          <th>Post Upload Date</th>
+          <th>Post Content</th>
+          <th>Action</th>
           </thead>
 
           {% for i in post %}

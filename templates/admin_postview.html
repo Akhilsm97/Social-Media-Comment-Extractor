@@ -44,12 +44,12 @@
           <div style="background-color: lightblue;" class="col-sm-6">
           </div>
 
-          <div class="col-sm-1 top_link">
-            <a href="#">About</a>
+           <div class="col-sm-1 top_link">
+            <a href="/adminHome">Home</a>
           </div>
-          <div class="col-sm-1 top_link">
-            <a href="#">Help</a>
-          </div>
+<!--          <div class="col-sm-1 top_link">-->
+<!--            <a href="#">Help</a>-->
+<!--          </div>-->
           <div class="col-sm-2">
             <div class="dropdown">
               <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -67,9 +67,10 @@
 <div style="margin:30px auto;">
   <div class="row">
 	<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+      <h2>View User Post</h2>
     <table border="3">
       <thead>
-      <th>Post_Image</th>
+      <th>Post Image</th>
       </thead>
 
       {% for p in post %}
@@ -84,12 +85,13 @@
 
 
 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+  <br><br>
     <center>
       <table border="2">
         <thead>
-        <th>username</th>
-        <th>comment</th>
-        <th>date</th>
+        <th>Username</th>
+        <th>Comment</th>
+        <th>Date</th>
         </thead>
 
         {% for i in comment %}
@@ -105,10 +107,11 @@
 </div>
 
 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+  <br><br>
   <center>
     <table border="2">
       <thead>
-      <th>Like_username</th>
+      <th>Liked Users</th>
       </thead>
 
       {% for l in like %}

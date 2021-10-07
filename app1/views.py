@@ -12,6 +12,19 @@ from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_protect,csrf_exempt,requires_csrf_token
 
 
+from nltk.corpus import stopwords
+import difflib
+from app1.RedundentCharacterRemover import RemoveRedundentCharacters
+from app1.StemingProcess import steming
+from app1.PunctuationRemover import RemovePunctuations
+from app1.n_gram_terms_extraction import one_gram,two_gram,three_gram,four_gram
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from django.http.response import HttpResponse
+from difflib import SequenceMatcher
+import math
+import app1.SynonymsRemover
+
 # Create your views here.
 from app1.models import Posts, Likes, Comments, Addfriend,Admin,Profilepic
 
@@ -145,6 +158,9 @@ def home(request):
     friend=Addfriend.objects.all()
     res = render(request,'home.html',{'username':username,'posts':posts,'likes':likes,'profilepic':profilepic,'request1':request1,
                                       'request2':request2,'friend':friend})
+    # res = render(request, 'newhome.html',
+    #              {'username': username, 'posts': posts, 'likes': likes, 'profilepic': profilepic, 'request1': request1,
+    #               'request2': request2, 'friend': friend})
     return res
 
 def confirm(request):
@@ -157,10 +173,10 @@ def login_page(request):
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username,password=password)
-        role=Admin.objects.get(username=username)
-        print(role.roll)
-        role1=role.roll
         if user is not None:
+            role = Admin.objects.get(username=username)
+            print(role.roll)
+            role1 = role.roll
             auth.login(request, user)
             request.session['username'] = username
 
@@ -216,6 +232,136 @@ def sign_up_page(request):
         res = render(request,'sign_up.html')
     return res
 
+
+def IncreSTS(vector):
+    cluster = ClustersNames.objects.values_list('cluster', flat=True)
+    if cluster:
+        for c in cluster:
+            ratio = SequenceMatcher(None, vector, c).ratio()
+            print(ratio)
+            if ratio > 0.6:
+                return c
+            else:
+                return vector
+    else:
+        ClustersNames(cluster=vector).save()
+        return vector
+
+
+def batchSTS1(vector):
+    cluster = ClustersNames.objects.values_list('cluster', flat=True)
+    if cluster:
+        for c in cluster:
+            ratio = SequenceMatcher(None, vector, c).ratio()
+            print(ratio)
+            if ratio > 0.6:
+                return c
+            else:
+                return vector
+    else:
+        ClustersNames(cluster=vector).save()
+        return vector
+
+
+def batchSTS():
+    comments = Comments.objects.values_list('comment', flat=True)
+    for comment in comments:
+
+        stopword = set(stopwords.words('english'))
+        print ("Removing Punctuations.......")
+        a = RemovePunctuations(comment)
+        print ("Removing Redundent Characters.......")
+        newstring = RemoveRedundentCharacters(a)
+        print ("Stemming.........")
+        newstring = steming(newstring)
+        print ("Onegram.......")
+        gram1 = one_gram(newstring)
+        print (gram1)
+        print ("Twogram.......")
+        gram2 = two_gram(newstring)
+        print (gram2)
+        print ("Threegram.......")
+        gram3 = three_gram(newstring)
+        print (gram3)
+        print ("Fourgram.......")
+        gram4 = four_gram(newstring)
+        print (gram4)
+        print ("Vectoraisation.......")
+        v = [i for i in newstring.lower().split() if i not in stopword]
+        vector = ""
+        for i in v:
+            vector = vector + " " + i
+        print (vector)
+
+        clustercomment = batchSTS1(vector)
+        cluster = ClustersNames.objects.filter(cluster=clustercomment)
+        if cluster:
+            Clusters(cluster=clustercomment, comment=comment).save()
+        else:
+            ClustersNames(cluster=clustercomment).save()
+            Clusters(cluster=clustercomment, comment=comment).save()
+
+
+def incrests(request):
+    clust = []
+    cluster = ClustersNames.objects.values_list('cluster', flat=True)
+    clustr = Clusters.objects.values_list('cluster', flat=True)
+
+    for cl in cluster:
+        clust.append(cl)
+    d = {}
+    for i in clust:
+        j = 0
+        for k in clustr:
+            if k == i:
+                j = j + 1
+        d[i] = j
+    print (d)
+    val = d.values()
+    sorte = []
+    big = -1
+    for i in val:
+        for j in range(0, len(d) - 1):
+            if val[j] >= val[j + 1]:
+                if j not in sorte:
+                    big = j
+        sorte.append(big)
+    print (sorte, "sorted")
+
+    print (val)
+    total = 0
+    average = []
+    avg = float()
+    for i in d.values():
+        total = total + i
+    print (total)
+    for i in d.values():
+        avg = round((float(i) / float(total)) * 100, 3)
+        print (avg)
+        average.append(avg)
+    print (average)
+    #     temp=average
+    #     average.sort()
+    #     sorted_average=average
+    avg_cluster = []
+    for i in d.keys():
+        if i not in avg_cluster:
+            avg_cluster.append(i)
+    print (avg_cluster)
+    top_k = 10
+    top_avg = []
+    print (sorte)
+    for i in range(0, top_k):
+        print (sorte[i])
+        top_avg.append(average[sorte[i]])
+    print  (top_avg)
+    top_cluster = []
+    for i in range(0, top_k):
+        top_cluster.append(avg_cluster[sorte[i]])
+
+    return render(request, 'watermark.html', {'clust': top_cluster, 'average': top_avg})
+
+
 def newcomment(request,post_id):
     obj=post_id;
     ob=Comments.objects.filter(post_id=post_id)
@@ -232,7 +378,98 @@ def commentview(request,post_id):
         date_time = now.strftime("%d/%m/%Y,%H:%M:%S")
         ct.DATE = date_time
         ct.save()
+
+        clustersadded = []
+        allcom = Comments.objects.all()
+        allcomli = []
+        for i in allcom:
+            allcomli.append(i.comment)
+        print(allcomli)
+        allcomliremoved = allcomli
+        print("Started...")
+        for c in allcomli:
+            print(c)
+            cii = difflib.get_close_matches(c, allcomliremoved)
+            print(cii)
+            clustersadded.append(cii)
+            for ci in cii:
+                allcomliremoved.remove(ci)
+            print(allcomliremoved)
+        print (clustersadded)
+        test = difflib.get_close_matches('nic', ['nicc', 'very good', 'very good', 'goood', 'very good', 'very good', 'goood', 'nice', 'nice', 'nice', 'nice', 'nice', 'good', 'nice', 'very good', 'good', 'goood', 'god'])
+        print(test)
+
         return redirect('/home')
+
+
+def clusteringReq(request):
+        comment = request.POST.get("comment")
+
+        # if comment:
+        # s = Comments(user=request.session['username'], comment=comment)
+        # s.save()
+        # print (comment)
+        comments = Comments.objects.values_list('comment', flat=True)
+        # for comment in comments:
+
+        import nltk
+        nltk.download('stopwords')
+        # stopword = set(stopwords.words('english'))
+        # print ("Removing Punctuations.......")
+        a = RemovePunctuations(comment)
+        # print ("Removing Redundent Characters.......")
+        newstring = RemoveRedundentCharacters(a)
+        # print ("Semming.........")
+        newstring = steming(newstring)
+        # print ("Onegram.......")
+        gram1 = one_gram(newstring)
+        # print (gram1)
+        # print ("Twogram.......")
+        gram2 = two_gram(newstring)
+        # print (gram2)
+        # print ("Threegram.......")
+        gram3 = three_gram(newstring)
+        # print (gram3)
+        # print ("Fourgram.......")
+        gram4 = four_gram(newstring)
+        print (gram4)
+        # print ("Vectoraisation.......")
+        v = [i for i in newstring.lower().split() if i not in stopword]
+        Sym = SynonymsRemover.synonyms(v)
+        v = Sym
+        vector = ""
+        for i in v:
+            vector = vector + " " + i
+        print (vector)
+
+        clustercomment = IncreSTS(vector)
+        cluster = ClustersNames.objects.filter(cluster=clustercomment)
+        if cluster:
+            Clusters(cluster=clustercomment, comment=comment).save()
+            comments = Comments.objects.values_list('comment', flat=True)
+            user = Comments.objects.values_list('user', flat=True)
+            c = list(comments)
+            u = list(user)
+            usercomment = zip(u, c)
+            # return render(request, 'upload.html', {'user': usercomment})
+        else:
+            ClustersNames(cluster=clustercomment).save()
+            Clusters(cluster=clustercomment, comment=comment).save()
+            comments = Comments.objects.values_list('comment', flat=True)
+            user = Comments.objects.values_list('user', flat=True)
+            c = list(comments)
+            u = list(user)
+            usercomment = zip(u, c)
+            # return render(request, 'upload.html', {'usercomment': usercomment})
+        # else:
+        #     comments = Comments.objects.values_list('comment', flat=True)
+        #     user = Comments.objects.values_list('user', flat=True)
+        #     c = list(comments)
+        #     u = list(user)
+        #     usercomment = zip(u, c)
+        #     return render(request, 'upload.html', {'usercomment': usercomment})
+
+
 
 def follow(request):
     if request.method=='POST':
@@ -301,22 +538,73 @@ def block(request,username):
     user=User.objects.all()
     return render(request,"admin.html",{'user':user})
 
+def adminHome(request):
+    user = User.objects.all()
+    return render(request, "admin.html", {'user': user})
+
 def profile_pic(request):
-    return render(request,"profilepic.html")
+    return render(request,"profilepicnew.html")
 
 def prof_pic(request):
-    username=request.session['username']
-    ab = Profilepic.objects.get(username=username)
-    ab.username=request.session.get('username')
-    profile_pic= request.FILES['img']
-    fs = FileSystemStorage()
-    filename = fs.save(profile_pic.name, profile_pic)
-    uploaded_file_url = fs.url(filename)
-    ab.profile_pic = uploaded_file_url
-    ab.save()
+    username = request.session['username']
+    data = Profilepic.objects.filter(username=username)
+    # print(data.count)
+    # if (data.count == 0):
+    if not data:
+        ab = Profilepic()
+        ab.username = request.session.get('username')
+        profile_pic = request.FILES['img']
+        fs = FileSystemStorage()
+        filename = fs.save(profile_pic.name, profile_pic)
+        uploaded_file_url = fs.url(filename)
+        ab.profile_pic = uploaded_file_url
+        ab.save()
+        return redirect('/home')
+    else:
+        ab = Profilepic.objects.get(username=username)
+        ab.username = request.session.get('username')
+        profile_pic = request.FILES['img']
+        fs = FileSystemStorage()
+        filename = fs.save(profile_pic.name, profile_pic)
+        uploaded_file_url = fs.url(filename)
+        ab.profile_pic = uploaded_file_url
+        ab.save()
+        return redirect('/home')
+
+def landingPage(request):
     return redirect('/home')
 
+def findfriend(request):
+    user = Profilepic.objects.all()
+    return render(request, "findfrients.html", {'user': user})
+    # return render(request, "newTemplate.html", {'user': user})
 
+def addFriendclick(request, username):
+    print(username)
+    user = Profilepic.objects.all()
+    return render(request, "findfrients.html", {'user': user})
 
+def viewCluster(request,post_id):
 
+    comment = Comments.objects.filter(post_id=post_id)
+
+    clustersadded = []
+    allcom = comment
+    allcomli = []
+    for i in allcom:
+        allcomli.append(i.comment)
+    print(allcomli)
+    allcomliremoved = allcomli
+    print("Started...")
+    for c in allcomli:
+        print(c)
+        cii = difflib.get_close_matches(c, allcomliremoved)
+        print(cii)
+        clustersadded.append(cii)
+        for ci in cii:
+            allcomliremoved.remove(ci)
+        print(allcomliremoved)
+    print (clustersadded)
+    clustersadded.append(allcomliremoved)
+    return render(request, "clusters.html", {'clusters': clustersadded})
 
