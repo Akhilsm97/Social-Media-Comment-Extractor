@@ -1,23 +1,67 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
+
 <head>
     <style>
-      .nav{
-  background-color: lightblue;
-}
-.navhead{
-  margin: 20px auto;
-}
-.navhead a:hover, a:focus {
-  color: #2a6496;
-  text-decoration: none;
-}
-.btn-outline-light {
-    color: #214569;
-    border-color: #10253a;
-}
+        body {
+            overflow-x: hidden !important;
+        }
 
+        .sidenav {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #add8e6;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+        }
+
+        .navhead a {
+            color: #000;
+        }
+
+        .sidenav a:hover {
+            color: #111;
+        }
+
+        .main {
+            margin-left: 160px;
+            padding: 0px 10px;
+        }
+
+        .nav {
+            background-color: style="color:blue";
+        }
+
+        .navhead {
+            margin: 20px auto;
+        }
+
+        .navhead a:hover,
+        a:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .btn-outline-light {
+            color: #214569;
+            border-color: #10253a;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
     </style>
     <meta charset="utf-8">
     <title>SocialPoc </title>
@@ -29,242 +73,254 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
+
 <body style="background-color:#E9E9E9;">
-<section id="navbar">
-    <div class="container-fluid">
-        <div class="row nav">
-            <div class="col-sm-2 logo">
-                SocialApp
-            </div>
-            <div class="col-sm-6">
-            </div>
+    <section id="navbar">
+        <div class="container-fluid">
+            <div class="row nav">
+                <div class="col-sm-2 logo">
+                    SocialApp
+                </div>
+                <div class="col-sm-6">
+                </div>
 
-            <div class="col-sm-1 top_link">
-                <a href="/landingPage">Home</a>
-            </div>
-<!--            <div class="col-sm-1 top_link">-->
-<!--                <a href="#">Help</a>-->
-<!--            </div>-->
-            <div class="col-sm-2">
-                <div class="dropdown">
-                    <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                        <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
+                <div class="col-sm-1 top_link">
+                    <a href="/landingPage">Home</a>
+                </div>
+                <!--            <div class="col-sm-1 top_link">-->
+                <!--                <a href="#">Help</a>-->
+                <!--            </div>-->
+                <div class="col-sm-2">
+                    <div class="dropdown">
+                        <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                            <span><i class="fas fa-user-alt"></i></span><span id="login_user_name">{{username}}</span>
+                        </div>
+                        <div class="dropdown-menu ">
+                            <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt"
+                                        aria-hidden="true"></span></i>
+                                Logout</a>
+                        </div>
                     </div>
-                    <div class="dropdown-menu ">
-                        <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt"
-                                                                                  aria-hidden="true"></span></i>
-                            Logout</a>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
-<div class="container">
-    <div class="row navhead">
-        <div class="col-sm-1">
-
-        </div>
-        <div class="col-sm-2 text-center">
-            <a href="/app/home">All</a>
-
-        </div>
-        <div class="col-sm-2 text-center">
-            <a href="/app/mypost">My Posts</a>
-        </div>
-        <div class="col-sm-2 text-center">
-            <a href="/app/addpost">Add Post</a>
-        </div>
-        <div class="col-sm-2 text-center">
-            <a href="/app/findfriend">Find</a>
-        </div>
-        <form class="col-sm-3" method="POST" action="/search">{% csrf_token %}
-            <!--          <label for="search">Search</label>-->
-            <input type="text" id="search" name="search" value="">
-            <button type="submit" class="btn btn-outline-light"
-
-                    style="
-    color: #214569;
-    border-color: #10253a;">
-                Search
-            </button>
-        </form>
-   </div>
-<!--  <br>-->
-
-<!--    <div>-->
-    <div class="col-sm-3">
-            <a href="/profilepic">Profile Pic</a><br>
-
-            {% for i in profilepic %}
-            <img src="../..{{i.profile_pic}}" height="100" width="100">
-             {% endfor %}
-    </div>
-    <div class="col-lg-6">
-     {% for i in request1 %}
-        {% if i.status == "1" %}
-        <div>Notifications - {{request2}}</div>
-        {{i.notification}} from {{i.username}}
-     {{request2}}
-    </div>
-
-    {% if i.notification == "request send" %}
-
-    <div class="col-lg-3">
-      <form class="col-sm-5" method="POST" action="{% url 'accept'%}"> {% csrf_token %}
-          <input type="hidden" name="acceptusername" value="{{i.username}}">
-          <input type="hidden" id="followstatus" name="followstatus" value="2">
-      <button type="submit" class="btn btn-outline-light"
-
-                    style="
-    color: #214569;
-    border-color: #10253a;">
-                Confirm
-            </button>
-      </form>
-
-        <form class="col-sm-5" method="POST" action="{% url 'decline'%}"> {% csrf_token %}
-            <input type="hidden"  name="declineusername" value="{{i.username}}">
-             <input type="hidden"  name="followstatus" value="3">
-         <button type="submit" class="btn btn-outline-light"
-
-                    style="
-    color: #214569;
-    border-color: #10253a;">
-                Delete
-            </button>
-        </form>
-    </div>
-
-    {% else %}
-       <div></div>
-    {% endif %}
-    {% endif %}
-    {% endfor %}
-    </div>
-
-
-    <div class="col-lg-6">
-        {% for i in friend %}
-        {% if i.username == username %}
-        {{i.followingusername}},
-
-        {% else %}
-        {{i.username}},
-
-        {% endif %}
-        {% endfor %}
-    </div>
-
-    <section id="all_posts">
-
-
-
-
-        {% block search %}
-        {% endblock %}
-
-
-
-        {% for p in posts %}
-        <div class="row post_area">
-
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-6 post">
-                <div style="margin:10px auto;">
-                    <i class="fas fa-user-circle" style="font-size: 35px;"></i><span id="user">{{p.username}}</span>
-                    <span style="margin-left:280px; font-size:14px;">{{p.time}}</span>
-                </div>
-                <div>
-                    <p>{{p.post_text}}
-                    </p>
-                    <img src="../../media/{{p.post_img}}" alt="" class="responsive">
-                </div>
-                <div class="like_btn">
-<!--               -->
-                    <span style="margin-right:0px;" id="impr{{p.post_id}}">24</span>
-                    <span><i class="far fa-thumbs-up" id="icon{{p.post_id}}" style="color:black;"></i> <button
-                            class='btn l_btn' id="{{p.post_id}}"> Like</button></span>
-                    <span><i class="far fa-comment"></i> <a href="/app/insertcomment/{{p.post_id}}"> Comment</a></span>
-                    <span><i class="fa fa-users"></i> <a href="/app/viewCluster/{{p.post_id}}"> Cluster</a></span>
-                </div>
-            </div>
-            <div class="col-sm-4">
-
-            </div>
-        </div>
-        {% endfor %}
     </section>
-</div>
+
+
+    <div class="container-fluid">
+        <div class="row navhead">
+            <div class="col-sm-1">
+                <a href="/profilepic">Profile Pic</a><br>
+
+                {% for i in profilepic %}
+                <img src="../..{{i.profile_pic}}" height="100" width="100">
+                {% endfor %}
+            </div>
+            <div class="col-sm-1 text-center">
+                <a href="/app/home">Home</a>
+
+            </div>
+            <div class="col-sm-2 text-center">
+                <a href="/app/mypost">My Posts</a>
+            </div>
+            <div class="col-sm-2 text-center">
+                <a href="/app/addpost">Add Post</a>
+            </div>
+            <div class="col-sm-2 text-center">
+                <a href="/app/findfriend">Find</a>
+            </div>
+            <form class="col-sm-4" method="POST" action="/search">{% csrf_token %}
+                <!--          <label for="search">Search</label>-->
+                <input type="text" id="search" name="search" value="">
+                <button type="submit" class="btn btn-outline-light" style="
+    color: #214569;
+    border-color: #10253a;">
+                    Search
+                </button>
+            </form>
+        </div>
+    </div>
+    <!--  <br>-->
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col-sm-2 no-padding">
+
+                <div class="sidenav">
+                    <a href="/">Friends</a>
+                    <a href="/create">Create</a>
+                    <a href="inbox/">Messages</a>
+                    <a href="">Settings</a>
+                </div>
+            </div>
+            <!--    <div>-->
+
+            <div class="col-lg-8">
+                {% for i in request1 %}
+                {% if i.status == "1" %}
+                <div>Notifications - {{request2}}</div>
+                {{i.notification}} from {{i.username}}
+                {{request2}}
+            </div>
+
+            {% if i.notification == "request send" %}
+
+            <div class="col-lg-3">
+                <form class="col-sm-5" method="POST" action="{% url 'accept'%}"> {% csrf_token %}
+                    <input type="hidden" name="acceptusername" value="{{i.username}}">
+                    <input type="hidden" id="followstatus" name="followstatus" value="2">
+                    <button type="submit" class="btn btn-outline-light" style="
+    color: #214569;
+    border-color: #10253a;">
+                        Confirm
+                    </button>
+                </form>
+
+                <form class="col-sm-5" method="POST" action="{% url 'decline'%}"> {% csrf_token %}
+                    <input type="hidden" name="declineusername" value="{{i.username}}">
+                    <input type="hidden" name="followstatus" value="3">
+                    <button type="submit" class="btn btn-outline-light" style="
+    color: #214569;
+    border-color: #10253a;">
+                        Delete
+                    </button>
+                </form>
+            </div>
+
+            {% else %}
+            <div></div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+
+            <div class="col-sm-12">
+                <section id="all_posts">
 
 
 
-{% csrf_token %}
-<script type="text/javascript">
-    $(document).ready(function(){
-         $(".l_btn").click(function(){
-           console.log("Button clicked");
-           p_id = $(this).attr('id')
-           console.log(p_id);
-           // console.log($(".shu").attr('id'));
-           p_l_username = $("#login_user_name").text();
-           console.log(p_l_username);
 
-           if($('#icon'+p_id).css('color')=='rgb(0, 0, 0)')
-           {
-           $.ajax(
-             {
-               type:"GET",
-               url: "/likepost",
-               data:{
-                  post_id: p_id ,
-                  post_like_name : p_l_username
-                },
-                success: function( data )
-                {
-                  console.log(data);
-                  console.log("Successfully liked");
-                  console.log($('#icon'+data).css('color'));
-                  // $('#icon'+data).css({'color':'blue'});
-                  // console.log($('#icon'+data).css('color'));
-                  // $('#impr')
-                  if($('#icon'+data).css('color')=='rgb(0, 0, 0)'){
-                    var el = parseInt($('#impr'+data).text());
-                    $('#impr'+data).text(el+1);
-                    $('#icon'+data).css({'color':'blue'});
-                    console.log($('#icon'+data).css('color'));
-                  }
+                    {% block search %}
+                    {% endblock %}
 
 
+
+                    {% for p in posts %}
+                    <div class=" post_area">
+
+
+                        <div class="col-sm-12 post">
+                            <div style="margin:10px auto;">
+                                <i class="fas fa-user-circle" style="font-size: 35px;"></i><span
+                                    id="user">{{p.username}}</span>
+                                <span style="margin-left:280px; font-size:14px;">{{p.time}}</span>
+                            </div>
+                            <div>
+                                <p>{{p.post_text}}
+                                </p>
+                                <img src="../../media/{{p.post_img}}" alt="" class="responsive">
+                            </div>
+                            <div class="like_btn">
+                                <!--               -->
+                                <span style="margin-right:0px;" id="impr{{p.post_id}}">24</span>
+                                <span><i class="far fa-thumbs-up" id="icon{{p.post_id}}" style="color:black;"></i>
+                                    <button class='btn l_btn' id="{{p.post_id}}"> Like</button></span>
+                                <span><i class="far fa-comment"></i> <a href="/app/insertcomment/{{p.post_id}}">
+                                        Comment</a></span>
+                                <span><i class="fa fa-users"></i> <a href="/app/viewCluster/{{p.post_id}}">
+                                        Cluster</a></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            {% for i in friend %}
+            {% if i.username == username %}
+            {{i.followingusername}},
+
+            {% else %}
+            {{i.username}},
+
+            {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+    </div>
+
+
+
+    {% csrf_token %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".l_btn").click(function () {
+                console.log("Button clicked");
+                p_id = $(this).attr('id')
+                console.log(p_id);
+                // console.log($(".shu").attr('id'));
+                p_l_username = $("#login_user_name").text();
+                console.log(p_l_username);
+
+                if ($('#icon' + p_id).css('color') == 'rgb(0, 0, 0)') {
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: "/likepost",
+                            data: {
+                                post_id: p_id,
+                                post_like_name: p_l_username
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                console.log("Successfully liked");
+                                console.log($('#icon' + data).css('color'));
+                                // $('#icon'+data).css({'color':'blue'});
+                                // console.log($('#icon'+data).css('color'));
+                                // $('#impr')
+                                if ($('#icon' + data).css('color') == 'rgb(0, 0, 0)') {
+                                    var el = parseInt($('#impr' + data).text());
+                                    $('#impr' + data).text(el + 1);
+                                    $('#icon' + data).css({ 'color': 'blue' });
+                                    console.log($('#icon' + data).css('color'));
+                                }
+
+
+                            }
+                        });
                 }
-              });
-            }
 
-           // $.ajax({
-           //   type: "POST",
-           //   url: "/like",
-             // headers: {
-             //   'Csrf-Token': '@play.filters.csrf.CSRF.getToken.map(_.value)'
-             // },
-             // data : {
-             //   'post_id': p_id,
-             //    'like_username':  p_l_username,
-             //    'csrfmiddlewaretoken': '{{ csrf_token }}',
-             // }
-             // data: "{post_id : " + p_id + "," + "like_username : " + p_l_username +"}",
-             //
-             //
-             // success: function(result){
-             //   console.log(result);
-             //   // alert(result.d);
-             //   console.log("successfully like the post");
-           //   }
-           // });
-         });
-       });
+                // $.ajax({
+                //   type: "POST",
+                //   url: "/like",
+                // headers: {
+                //   'Csrf-Token': '@play.filters.csrf.CSRF.getToken.map(_.value)'
+                // },
+                // data : {
+                //   'post_id': p_id,
+                //    'like_username':  p_l_username,
+                //    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                // }
+                // data: "{post_id : " + p_id + "," + "like_username : " + p_l_username +"}",
+                //
+                //
+                // success: function(result){
+                //   console.log(result);
+                //   // alert(result.d);
+                //   console.log("successfully like the post");
+                //   }
+                // });
+            });
+        });
 
        //CSRF code
 //        function getCookie(name) {
@@ -301,6 +357,7 @@
 
 
 
-</script>
+    </script>
 </body>
+
 </html>

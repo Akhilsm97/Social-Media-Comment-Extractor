@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from app1 import views
+from django.urls import path
+from .views import CreateThread, ListThreads, ThreadView, CreateMessage
 
 
 urlpatterns = [
@@ -30,4 +32,9 @@ urlpatterns = [
     url('addFriendclick/(?P<username>\w+)/$',views.addFriendclick),
     url('viewCluster/(?P<post_id>\w+)/$',views.viewCluster),
     url('adminHome',views.adminHome),
+    url('inbox/', ListThreads.as_view(), name='inbox'),
+    url('inbox/create-thread/', CreateThread.as_view(), name='create-thread'),
+    url('inbox/<int:pk>/', ThreadView.as_view(), name='thread'),
+    url('inbox/<int:pk>/create-message/', CreateMessage.as_view(), name='create-message'),
 ]
+ 
