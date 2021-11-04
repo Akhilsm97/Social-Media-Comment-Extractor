@@ -83,7 +83,11 @@ WSGI_APPLICATION = 'socialpoc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< Updated upstream
         'NAME': 'socialpoc',
+=======
+        'NAME': 'gitlab',
+>>>>>>> Stashed changes
         'USER':'root',
         'PASSWD':'',
         'HOST':'LOCALHOST',
