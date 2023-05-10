@@ -119,8 +119,16 @@
               <img src="../../media/{{p.post_img}}" alt="" class="responsive">
             </div>
             <div class="like_btn">
-              <span><i class="far fa-thumbs-up"></i> <a class='btn' href="/home/like?post_id={{p.post_id}}"> Like</a></span>
-              <span><i class="far fa-comment"></i> <a class='btn' href="#"> Comment</a></span>
+              <span style="margin-right:0px;" id="impr{{p.post_id}}">{{p.count}}</span>
+              {% if p.status ==  True %}
+                                    <a href="/MyUnlikesposts/{{p.post_id}}/{{username}}">UnLike</a></span>
+                                    {% else %}
+                                    <a style="color:black;" href="/Mylikes_post/{{p.post_id}}/{{username}}">Like</a></span>
+                                    {% endif %}
+              <span><i class="far fa-comment"></i> <a href="/insertcomment/{{p.post_id}}">
+                                        Comment</a></span>
+            <span><i class="far fa-delete"></i> <a href="/deletepost/{{p.post_id}}">
+                                        Delete</a></span>
             </div>
         </div>
         <div class="col-sm-4">

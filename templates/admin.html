@@ -156,18 +156,18 @@
       <h3>Users</h3><br>
     <table border="1" class = "table table-hover table-bordered table-striped">
       <thead>
-      <th> User's Name</th>
-      <th>Email</th>
-      <th></th>
-      <th></th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User's Name</th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
       </thead>
 
       {% for i in user %}
       {% if i.first_name != "admin" %}
       <tr>
-        <td>{{i.first_name}}</td>
-        <td>{{i.email}}</td>
-        <td><a href="view_click/{{i.username}}">View</a></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i.first_name}}</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i.email}}</td>
+        <td><a href="view_click/{{i.username}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</a></td>
         <td>
 
           {% if i.is_active == 1 %}

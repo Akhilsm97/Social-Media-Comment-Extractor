@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
+    <style>
+        body {
+            overflow-x: hidden !important;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #add8e6;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+        }
+
+        .navhead a {
+            color: #000;
+        }
+
+        .sidenav a:hover {
+            color: #111;
+        }
+
+        .main {
+            margin-left: 160px;
+            padding: 0px 10px;
+        }
+
+        .nav {
+            background-color: style="color:blue";
+        }
+
+        .navhead {
+            margin: 20px auto;
+        }
+
+        .navhead a:hover,
+        a:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .btn-outline-light {
+            color: #214569;
+            border-color: #10253a;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>SocialPoc </title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color:#E9E9E9;">
+    <section id="navbar">
+        <div class="container-fluid">
+            <div class="row nav">
+                <div class="col-sm-2 logo">
+                    SocialApp
+                </div>
+                <div class="col-sm-6">
+                </div>
+
+                <div class="col-sm-1 top_link">
+                    <a href="/adminHome">Home</a>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="dropdown">
+              <div class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <span><i class="fas fa-user-alt"></i></span> {{username}}
+              </div>
+              <div class="dropdown-menu ">
+                <a class="dropdown-item downlist" href="/logout"><span><i class="fa fa-sign-out-alt" aria-hidden="true"></span></i>Logout</a>
+              </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container-fluid">
+        <div class="row navhead">
+<!--            <div class="col-sm-1">-->
+<!--                <a href="/profilepic">Profile Pic</a><br>-->
+
+<!--                {% for i in profilepic %}-->
+<!--                <img src="../..{{i.profile_pic}}" height="100" width="100">-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+
+<!--            <form class="col-sm-4" method="POST" action="/search">{% csrf_token %}-->
+<!--                &lt;!&ndash;          <label for="search">Search</label>&ndash;&gt;-->
+<!--                <input type="text" id="search" name="search" value="">-->
+<!--                <button type="submit" class="btn btn-outline-light" style="-->
+<!--    color: #214569;-->
+<!--    border-color: #10253a;">-->
+<!--                    Search-->
+<!--                </button>-->
+<!--            </form>-->
+        </div>
+    </div>
+    <!--  <br>-->
+    <div class="container-fluid">
+        <div class="row">
+
+
+
+
+
+            </div>
+
+
+            <div></div>
+<center>
+
+            <div class="col-sm-12">
+                <section id="all_posts">
+
+
+
+
+                    {% block search %}
+                    {% endblock %}
+
+
+
+                    {% for p in post %}
+
+                    <div class=" post_area">
+
+
+                        <div class="col-sm-5 post">
+
+                            <div>
+                                <p>{{p.post_text}}
+                                </p>
+
+                                <img src="../../../../media/{{ p.post_img}}" alt="" class="responsive">
+                            </div>
+
+
+                        </div>
+                        <div class="col-sm-4">
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </section>
+            </div>
+    <div class="col-lg-3 col-md-6 ">
+  <br><br>
+    <center>
+      <table border="3">
+        <thead>
+        <th style="padding: 15px;">Username</th>
+        <th style="padding: 15px;">Comment</th>
+        <th style="padding: 15px;">Date</th>
+        </thead>
+
+        {% for i in comment %}
+        <tr>
+          <td>{{i.username}}</td>
+          <td>{{i.comment}}</td>
+          <td>{{i.DATE}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+    </center>
+
+
+</div>
+
+        </div>
+</center>
+
+
+
+    </div>
+
+
+    </div>
+
+
+
+    {% csrf_token %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".l_btn").click(function () {
+                console.log("Button clicked");
+                p_id = $(this).attr('id')
+                console.log(p_id);
+                // console.log($(".shu").attr('id'));
+                p_l_username = $("#login_user_name").text();
+                console.log(p_l_username);
+
+                if ($('#icon' + p_id).css('color') == 'rgb(0, 0, 0)') {
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: "/likepost",
+                            data: {
+                                post_id: p_id,
+                                post_like_name: p_l_username
+                            },
+                            success: function (data) {
+                                alert(data);
+                                console.log(data);
+                                console.log("Successfully liked");
+                                console.log($('#icon' + data).css('color'));
+                                // $('#icon'+data).css({'color':'blue'});
+                                // console.log($('#icon'+data).css('color'));
+                                // $('#impr')
+                                if ($('#icon' + data).css('color') == 'rgb(0, 0, 0)') {
+                                    var el = parseInt($('#impr' + data).text());
+                                    $('#impr' + data).text(el + 1);
+                                    $('#icon' + data).css({ 'color': 'blue' });
+                                    console.log($('#icon' + data).css('color'));
+                                }
+
+
+                            }
+                        });
+                }
+
+                // $.ajax({
+                //   type: "POST",
+                //   url: "/like",
+                // headers: {
+                //   'Csrf-Token': '@play.filters.csrf.CSRF.getToken.map(_.value)'
+                // },
+                // data : {
+                //   'post_id': p_id,
+                //    'like_username':  p_l_username,
+                //    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                // }
+                // data: "{post_id : " + p_id + "," + "like_username : " + p_l_username +"}",
+                //
+                //
+                // success: function(result){
+                //   console.log(result);
+                //   // alert(result.d);
+                //   console.log("successfully like the post");
+                //   }
+                // });
+            });
+        });
+
+       //CSRF code
+//        function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = cookies[i].trim();
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+// var csrftoken = getCookie('csrftoken');
+//
+// function csrfSafeMethod(method) {
+//     // these HTTP methods do not require CSRF protection
+//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+// }
+// $.ajaxSetup({
+//     beforeSend: function(xhr, settings) {
+//         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+//             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+//         }
+//     }
+// });
+       // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -60,5 +60,9 @@ class MessageModel(models.Model):
 	date = models.DateTimeField(default=timezone.now)
 	is_read = models.BooleanField(default=False)
 
+class Notification(models.Model):
+	message = models.CharField(max_length=1000)
+
+
 
 

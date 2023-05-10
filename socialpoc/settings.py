@@ -75,7 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'socialpoc.wsgi.application'
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -83,11 +83,7 @@ WSGI_APPLICATION = 'socialpoc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-<<<<<<< Updated upstream
         'NAME': 'socialpoc',
-=======
-        'NAME': 'gitlab',
->>>>>>> Stashed changes
         'USER':'root',
         'PASSWD':'',
         'HOST':'LOCALHOST',

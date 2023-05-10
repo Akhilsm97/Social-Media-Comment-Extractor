@@ -1,0 +1,38 @@
+<!-- {% extends 'base.html' %} -->
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 p-5">
+			<a href="/landingPage" class="btn btn-primary mt-3">Back to Your Home</a>
+<!--			<a href="Addnotification" class="btn btn-success mt-3" style="text-align:right;">Send Message</a>-->
+		</div>
+	</div>
+
+<!--	<div class="row">-->
+<!--		<div class="col-md-12 p-5">-->
+<!--			<h3>Start a Conversation!</h3>-->
+<!--		</div>-->
+<!--	</div>-->
+
+
+<center>
+      <h1>Notification</h1><br>
+
+    <table border="1" class = "table table-hover table-bordered table-striped">
+      <thead>
+      <th> Messages</th>
+
+      </thead>
+
+      {% for p in notification %}
+
+      <tr>
+        <td>{{p.message}}</td>
+
+      {% endfor %}
+    </table>
+    </center>
+{% endblock content %}

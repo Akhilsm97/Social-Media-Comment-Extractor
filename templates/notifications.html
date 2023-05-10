@@ -1,0 +1,33 @@
+<!-- {% extends 'base.html' %} -->
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 p-5">
+			<a href="adminHome" class="btn btn-light">Back to Your Home</a>
+		</div>
+	</div>
+
+<!--	<div class="row">-->
+<!--		<div class="col-md-12 p-5">-->
+<!--			<h3>Start a Conversation!</h3>-->
+<!--		</div>-->
+<!--	</div>-->
+
+	<div class="row justify-content-center mt-3 mb-5">
+		<div class="col-md-5 col-sm-12">
+			<form method="POST" action="{% url 'sending_msg' %}">
+				{% csrf_token %}
+				<p>Message.</p>
+                <input type="text"  name="message" >
+				<div class="d-grid gap-2">
+					<button class="btn btn-success mt-3" type="submit">Send</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

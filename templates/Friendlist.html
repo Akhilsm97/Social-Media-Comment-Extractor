@@ -1,0 +1,48 @@
+<!-- {% extends 'base.html' %} -->
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 p-5">
+			<a href="/home" class="btn btn-primary mt-3">Back to Your Home</a>
+<!--			<a href="Addnotification" class="btn btn-success mt-3" style="text-align:right;">Send Message</a>-->
+		</div>
+	</div>
+
+<!--	<div class="row">-->
+<!--		<div class="col-md-12 p-5">-->
+<!--			<h3>Start a Conversation!</h3>-->
+<!--		</div>-->
+<!--	</div>-->
+
+
+<center>
+      <h1>FriendList</h1><br>
+
+    <table border="1" class = "table table-hover table-bordered table-striped">
+      <thead>
+      <th> Friends</th>
+      <th> Message</th>
+
+      </thead>
+
+      {% for p in friends %}
+
+      <tr>
+        <td >{{p.followingusername}}</td>
+        <td>
+            <div class="col-md-1 p-3">
+			<form method="POST" action="{% url 'friendsthread' %}">{% csrf_token %}
+            <input type="hidden"  name="username" value="{{p.followingusername}}">
+				<button class="btn btn-success" type="submit">Send</button>
+			</form>
+		</div>
+        </td>
+
+      {% endfor %}
+    </table>
+    </center>
+{% endblock content %}
+

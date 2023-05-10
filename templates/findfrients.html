@@ -247,10 +247,12 @@
 			 <div class="faculty slideanim" id="faculty">
 <!--	            <h3>FACULTY</h3>-->
 	             {% for i in user %}
+
 				 <div class="col-md-3 col-sm-3 team-top">
-						<div class="view view-seventh">
-							<a href="/app/addFriendclick/{{i.username}}"><img class="img-responsive" src="../..{{i.profile_pic}}" alt="name" maxheight="300" width="300"></a>
-								<div class="mask">
+<!--						<div class="view view-seventh">-->
+							<img class="img-responsive" src="../..{{i.profile_pic}}" alt="name" maxheight="300" width="300"></a>
+
+							<div class="mask">
 <!--									<ul class="social">-->
 <!--										<li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>-->
 <!--										<li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>-->
@@ -258,9 +260,10 @@
 <!--									</ul>-->
 								</div>
 			                    <h6>{{i.username}}</h6>
-			                    <p>Click to Request</p>
-                   		</div>
+			                    <p><a href="/clickingfriends/{{i.username}}">Request</a></span></p>
+<!--                   		</div>-->
 					</div>
+
 				 {% endfor %}
 
 <!--					<div class="col-md-3 col-sm-3 team-top team-in">-->

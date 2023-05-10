@@ -5,6 +5,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 p-5">
+			<a href="/home" class="btn btn-primary mt-3">Back to Your Home</a>
+<!--			<a href="Addnotification" class="btn btn-success mt-3" style="text-align:right;">Send Message</a>-->
+		</div>
+		<div class="col-md-12 p-5">
 			<h3>Your Conversations</h3>
 		</div>
 	</div>
@@ -12,16 +16,17 @@
 	<div class="row">
 		<div class="col-md-12 p-5">
 			<form method="GET" action="{% url 'create-thread' %}">
-				<button class="btn btn-light p-3" type="submit">Start a Conversation</button>
+
+				<button class="btn btn-success p-3" type="submit">Start a Conversation</button>
 			</form>
 		</div>
 	</div>
 
-	{% for thread in threads.all %}
+	{% for threades in threads.all %}
 	<div class="row mb-3">
 		<div class="card col-md-12 p-5 shadow-sm">
-			<h5>{{ thread.user }} - {{ thread.receiver }}</h5>
-			<a class="stretched-link" href="{% url 'thread' thread.pk %}"></a>
+			<h5>{{ threades.user }} - {{ threades.receiver }}</h5>
+			<a class="stretched-link" href="{% url 'thread' threades.id %}"></a>
 		</div>
 	</div>
 	{% endfor %}

@@ -35,7 +35,7 @@
 {% elif data.status == "1" %}
 <form class="col-sm-5" method="POST" action="{% url 'follow'%}"> {% csrf_token %}
     <input type="hidden"  name="follow" value="{{search}}">
-    <input type="hidden"  name="followstatus" value="2">
+    <input type="hidden"  name="followstatus" value="1">
             <!--          <label for="search">Search</label>-->
             <button type="submit" class="btn btn-outline-light"
 
@@ -86,7 +86,7 @@
 
             <div class="col-sm-2">
             </div>
-            <div class="col-sm-6 post">
+            <div class="col-sm-16 post">
                 <div style="margin:10px auto;">
                     <i class="fas fa-user-circle" style="font-size: 35px;"></i><span id="user">{{s.username}}</span>
                     <span style="margin-left:280px; font-size:14px;">{{s.time}}</span>
